@@ -1,4 +1,4 @@
-# `<name of application here>`
+# `Meetup Clone Application`
 
 ## Database Schema Design
 
@@ -53,7 +53,7 @@ Returns the information about the current user that is logged in.
 - Request
 
   - Method: $GET
-  - URL: $/users/me
+  - URL: $/user
   - Body: none
 
 - Successful Response
@@ -265,7 +265,7 @@ Returns all the groups.
 - Request
 
   - Method: $GET
-  - URL: $/users/me/groups
+  - URL: $/user/groups
   - Body: none
 
 - Successful Response
@@ -304,7 +304,7 @@ Returns the details of a group specified by its id.
 - Request
 
   - Method: $GET
-  - URL: $/groups/:id
+  - URL: $/groups/:groupId
   - Body: none
 
 - Successful Response
@@ -427,7 +427,7 @@ Updates and returns an existing group.
 - Request
 
   - Method: $PATCH
-  - URL: $/groups/:id
+  - URL: $/groups/:groupId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -510,7 +510,7 @@ Deletes an existing group.
 - Request
 
   - Method: $DELETE
-  - URL: $/groups/:id
+  - URL: $/groups/:groupId
   - Body: none
 
 - Successful Response
@@ -549,7 +549,7 @@ Returns the members of a group specified by its id.
 - Request
 
   - Method: $GET
-  - URL: $/groups/:id/members
+  - URL: $/groups/:groupId/members
   - Body: none
 
 - Successful Response: If you ARE the organizer of the group. Shows all
@@ -644,7 +644,7 @@ Request a new membership for a group specified by id.
 - Request
 
   - Method: $POST
-  - URL: $/groups/:id/join
+  - URL: $/groups/:groupId/join
   - Headers:
     - Content-Type: application/json
   - Body: none
@@ -717,7 +717,7 @@ Change the status of a membership for a group specified by id.
 - Request
 
   - Method: $PATCH
-  - URL: $/groups/:groupId/members/:memberId
+  - URL: $/groups/:groupId/members
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1152,7 +1152,7 @@ Edit a new venue specified by its id
 - Request
 
   - Method: $PATCH
-  - URL: $/groups/:groupId/venues/:venueId
+  - URL: $/venues/:venueId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1648,7 +1648,7 @@ Delete a attendance to a event specified by id.
 - Request
 
   - Method: $DELETE
-  - URL: /events/:eventId/atendees
+  - URL: /events/:eventId/atendees/:atendeeId
   - Headers:
     - Content-Type: application/json
   - Body: none
