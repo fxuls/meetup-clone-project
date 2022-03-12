@@ -104,6 +104,6 @@ dist
 .tern-port
 
 # idea files
-.idea/
+idea/
 
 .DS_Store
