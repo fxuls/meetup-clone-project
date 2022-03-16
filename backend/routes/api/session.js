@@ -1,18 +1,35 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
+const { check } = require("express-validator");
 
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User } = require("../../db/models");
+const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+const validateLogin = [
+  check("email")
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Please provide a valid email."),
+  check("password")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a password."),
+  handleValidationErrors,
+];
+
+// login
 router.post(
   "/",
+  validateLogin,
   asyncHandler(async (req, res, next) => {
+      console.log("GOT HERE");
     const { email, password } = req.body;
 
     const user = await User.login({ email, password });
 
+    console.log("AFTER LOGIN");
     if (!user) {
       const err = new Error("Login failed");
       err.status = 401;
@@ -29,9 +46,20 @@ router.post(
   })
 );
 
+// logout
 router.delete("/", (_req, res) => {
-    res.clearCookie('token');
-    return res.json({ message: "success" });
+  res.clearCookie("token");
+  return res.json({ message: "success" });
+});
+
+// get current user
+router.get("/", restoreUser, (req, res) => {
+  const { user } = req;
+  if (user) {
+    return res.json({
+      user: user.toSafeObject(),
+    });
+  } else return res.json({});
 });
 
 module.exports = router;
