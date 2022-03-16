@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.BOOLEAN,
     },
-    preview_image: {
+    preview_image_id: {
       type: DataTypes.INTEGER,
     },
     city: {

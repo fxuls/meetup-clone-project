@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      preview_image: {
+      preview_image_id: {
         type: Sequelize.INTEGER,
       },
       city: {
