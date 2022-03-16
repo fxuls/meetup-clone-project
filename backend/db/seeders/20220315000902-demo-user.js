@@ -1,0 +1,53 @@
+"use strict";
+const bcrypt = require("bcryptjs");
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+     */
+    await queryInterface.bulkInsert(
+      "Users",
+      [
+        {
+          firstName: "Test",
+          lastName: "User",
+          email: "testuser@gmail.com",
+          passwordHash: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "Mary",
+          lastName: "Steele",
+          email: "msteele@gmail.com",
+          passwordHash: bcrypt.hashSync("asdfwow"),
+        },
+        {
+          firstName: "Ethan",
+          lastName: "Moore",
+          email: "emoore@gmail.com",
+          passwordHash: bcrypt.hashSync("paswurd"),
+        },
+      ],
+      {}
+    );
+  },
+
+  async down(queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+    const Op = Sequelize.Op;
+    await queryInterface.bulkDelete('Users', {
+      email: { [Op.in]: ['testuser@gmail.com', 'msteele@gmail.com', 'emoore@gmail.com'] }
+    }, {});
+  },
+};
