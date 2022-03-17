@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     type: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: Sequelize.ENUM('inperson', 'virtual'),
     },
     private: {
       allowNull: false,

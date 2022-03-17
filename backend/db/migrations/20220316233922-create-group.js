@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       type: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('inperson', 'virtual'),
         allowNull: false,
       },
       private: {
