@@ -12,21 +12,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    const Op = Sequelize.Op;
-    await queryInterface.bulkDelete(
-      "Images",
-      {
-        url: {
-          [Op.in]: [
-            "/images/image1.png",
-            "/images/image2.png",
-            "/images/image3.png",
-            "/images/image4.png",
-            "/images/image5.png",
-          ],
-        },
-      },
-      {}
-    );
+    queryInterface.bulkDelete('Images', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };

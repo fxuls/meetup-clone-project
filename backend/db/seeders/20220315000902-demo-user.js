@@ -30,9 +30,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    const Op = Sequelize.Op;
-    await queryInterface.bulkDelete('Users', {
-      email: { [Op.in]: ['testuser@gmail.com', 'msteele@gmail.com', 'emoore@gmail.com'] }
-    }, {});
+    queryInterface.bulkDelete('Users', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };

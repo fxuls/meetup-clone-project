@@ -45,6 +45,10 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    // TODO add down for events seeders
+    queryInterface.bulkDelete('Events', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   }
 };

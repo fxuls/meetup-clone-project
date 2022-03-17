@@ -35,6 +35,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    // TODO add down for venue seeds
+    queryInterface.bulkDelete('Venues', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };

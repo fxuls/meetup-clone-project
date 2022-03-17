@@ -35,15 +35,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    const Op = Sequelize.Op;
-    await queryInterface.bulkDelete(
-      "Groups",
-      {
-        name: {
-          [Op.in]: ["Awesome group!", "Running friends", "DnD Game Night"],
-        },
-      },
-      {}
-    );
+    queryInterface.bulkDelete('Groups', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };
