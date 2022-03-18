@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         through: "GroupImages",
         foreignKey: "image_id",
       });
+
+      Images.belongsToMany(models.Event, {
+        through: "EventImages",
+        foreignKey: "image_id",
+      });
     }
   }
   Image.init({
