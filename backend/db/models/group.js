@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         through: "Members",
         foreignKey: "group_id",
       });
+
+      Group.belongsToMany(model.Image, {
+        through: "GroupImages",
+        as: "Images",
+        foreignKey: "group_id",
+      });
     }
   }
   Group.init({

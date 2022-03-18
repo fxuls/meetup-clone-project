@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Image.belongsTo(models.Group, { foreignKey: "preview_image_id" });
       Image.belongsTo(models.Event, { foreignKey: "preview_image_id" });
+
+      Image.belongsToMany(models.Group, {
+        through: "GroupImages",
+        foreignKey: "image_id",
+      });
     }
   }
   Image.init({
