@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       Group.belongsTo(models.User, { foreignKey: "organizer_id" });
       Group.hasMany(models.Venue, { foreignKey: "group_id" });
       Group.hasOne(models.Image, { foreignKey: "preview_image_id" });
+
+      Group.belongsToMany(models.User, {
+        through: "Members",
+        foreignKey: "group_id",
+      });
     }
   }
   Group.init({
@@ -25,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     type: {
       allowNull: false,
-      type: Sequelize.ENUM('inperson', 'virtual'),
+      type: DataTypes.ENUM('inperson', 'virtual'),
     },
     private: {
       allowNull: false,
