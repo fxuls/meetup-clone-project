@@ -5,7 +5,7 @@ module.exports = {
    await queryInterface.bulkInsert("Events", [
      {
        groupId: 1,
-       venue_id: 1,
+       venueId: 1,
        name: "Awesome event!",
        description: "This is our first Awesome event. We will be awesome together.",
        type: "inperson",
@@ -17,7 +17,7 @@ module.exports = {
      },
      {
       groupId: 2,
-      venue_id: 2,
+      venueId: 2,
       name: "Running around the park",
       description: "We will be running around the park",
       type: "inperson",
