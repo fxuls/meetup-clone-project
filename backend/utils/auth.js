@@ -4,6 +4,14 @@ const { User } = require("../db/models");
 
 const { secret, expiresIn } = jwtConfig;
 
+const unauthorizedError = () => {
+  const err = new Error("Unauthorized");
+  err.title = "Unauthorized";
+  err.errors = ["Unauthorized"];
+  err.status = 401;
+  return err;
+};
+
 const setTokenCookie = (res, user) => {
   // Create the token.
   const token = jwt.sign(
@@ -49,16 +57,16 @@ const restoreUser = (req, res, next) => {
 };
 
 const requireAuth = [
-    restoreUser,
-    function (req, res, next) {
-      if (req.user) return next()
+  restoreUser,
+  function (req, res, next) {
+    if (req.user) return next();
+    return next(unauthorizedError());
+  },
+];
 
-      const err = new Error('Unauthorized')
-      err.title = 'Unauthorized'
-      err.errors = ['Unauthorized']
-      err.status = 401
-      return next(err)
-    },
-  ];
-
-  module.exports = { setTokenCookie, restoreUser, requireAuth };
+module.exports = {
+  setTokenCookie,
+  restoreUser,
+  requireAuth,
+  unauthorizedError,
+};
