@@ -1,25 +1,154 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
+const { check } = require("express-validator");
 
-const { Group, Image, Venue, Event } = require("../../db/models");
+const { handleValidationErrors } = require("../../utils/validation");
+const { Group, Image, Venue, Event, User } = require("../../db/models");
+const { requireAuth, unauthorizedError } = require("../../utils/auth");
 
 const router = express.Router();
 
 // get all groups
-router.get("/", asyncHandler(async (req, res) => {
-    const groups = await Group.findAll({ include: Image }); // TODO fix imagePreviewURL
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const groups = await Group.findAll({
+      include: { model: Image, as: "images" },
+    }); // TODO fix imagePreviewURL
     res.json({ Groups: groups });
-}));
+  })
+);
 
 // get group info by groupId
-router.get("/:groupId", asyncHandler(async (req, res) => {
+router.get(
+  "/:groupId(\\d+)",
+  asyncHandler(async (req, res) => {
     const { groupId } = req.params;
-    const group = await Group.findByPk(groupId, { include: ["Organizer"]}); // TODO add images and previewImageURL
+    const group = await Group.findByPk(groupId, { include: ["Organizer"] }); // TODO add images and previewImageURL
+
+    if (!group) {
+      // not the correct way to do it
+      // const err = new Error("Group couldn't be found");
+      // err.status = 404;
+      // throw err;
+
+      res.status(404);
+      return res.json({
+        message: "Group couldn't be found",
+        statusCode: 404,
+      });
+    }
+
     res.json({ group });
-}));
+  })
+);
 
-router.get("/user", asyncHandler(async (req, res) => {
+// get all groups user is a member of or is organizer of
+router.get(
+  "/user",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    // find all groups user is member in
+    const userId = req.user.id;
+    const user = await User.findByPk(userId, {
+      include: { model: Group, as: "Memberships" },
+    });
+    const memberships = user.Memberships;
 
-}));
+    // find all groups user is organizer of
+    const organizerGroups = await Group.findAll({
+      where: {
+        organizerId: userId,
+      },
+    });
+
+    // add any organizerGroups that are not present in memberships
+    const membershipGroupIds = memberships.map((group) => group.id);
+    organizerGroups.forEach((group) => {
+      if (!membershipGroupIds.includes(group.id)) memberships.push(group);
+    });
+
+    res.json({ Groups: memberships });
+  })
+);
+
+validateGroup = [
+  check("name")
+    .exists({ checkFalsy: true })
+    .withMessage("Name cannot be blank."),
+  check("name")
+    .isLength({ max: 60 })
+    .withMessage("Name must be 60 characters or fewer."),
+  check("about")
+    .exists()
+    .isLength({ min: 50 })
+    .withMessage("About must be 50 characters or more."),
+  check("type")
+    .exists()
+    .isIn(["inperson", "virtual"])
+    .withMessage("Type must be virtual or inperson."),
+  check("private")
+    .exists()
+    .isBoolean()
+    .withMessage("Private must be a boolean."),
+  check("city").exists().withMessage("City is required."),
+  check("state").exists().withMessage("State is required."),
+  handleValidationErrors,
+];
+
+// create a new group
+router.post(
+  "/",
+  requireAuth,
+  validateGroup,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { name, about, type, private, city, state } = req.body;
+
+    const group = await Group.create({
+      organizerId: userId,
+      name,
+      about,
+      type,
+      private,
+      city,
+      state,
+    });
+
+    res.status(201);
+    res.json(group);
+  })
+);
+
+// edit a group
+router.patch(
+  "/:groupId(\\d+)",
+  requireAuth,
+  validateGroup,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const groupId = req.params.groupId;
+    const group = await Group.findByPk(groupId);
+
+    // check that group exists
+    if (!group) {
+      res.status(404);
+      return res.json({
+        message: "Group couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // check that user is group organizer
+    if (group.organizerId !== userId) {
+      throw unauthorizedError();
+    }
+
+    // update group and return it
+    const { name, about, type, private, city, state } = req.body;
+    await group.update({ name, about, type, private, city, state });
+    res.json(group);
+  })
+);
 
 module.exports = router;
