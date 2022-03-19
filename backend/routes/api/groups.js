@@ -15,11 +15,11 @@ router.get("/", asyncHandler(async (req, res) => {
 router.get("/:groupId", asyncHandler(async (req, res) => {
     const { groupId } = req.params;
     const group = await Group.findByPk(groupId, { include: ["Organizer"]}); // TODO add images and previewImageURL
-    res.json({ groups });
+    res.json({ group });
 }));
 
 router.get("/user", asyncHandler(async (req, res) => {
 
-}))
+}));
 
 module.exports = router;
