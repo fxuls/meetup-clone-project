@@ -28,7 +28,6 @@ router.post(
 
     const user = await User.login({ email, password });
 
-    console.log("AFTER LOGIN");
     if (!user) {
       const err = new Error("Login failed");
       err.status = 401;
