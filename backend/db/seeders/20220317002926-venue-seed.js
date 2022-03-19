@@ -6,7 +6,7 @@ module.exports = {
       "Venues",
       [
         {
-          group_id: 1,
+          groupId: 1,
           address: "123 Place Rd",
           city: "San Diego",
           state: "Montana",
@@ -14,7 +14,7 @@ module.exports = {
           lng: -110.167096,
         },
         {
-          group_id: 2,
+          groupId: 2,
           address: "2020 Main St",
           city: "St Louis",
           state: "Missouri",
@@ -22,7 +22,7 @@ module.exports = {
           lng: -90.264414,
         },
         {
-          group_id: 2,
+          groupId: 2,
           address: "1785 Pennsylvania Ave",
           city: "Portland",
           state: "Oregon",

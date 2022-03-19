@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {}
   }
   EventImage.init({
-    image_id: {
+    imageId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    event_id: {
+    eventId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }

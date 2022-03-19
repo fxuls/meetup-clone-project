@@ -5,11 +5,11 @@ module.exports = {
     await queryInterface.bulkInsert(
       "EventImages",
       [
-        { event_id: 1, image_id: 1 },
-        { event_id: 1, image_id: 2 },
-        { event_id: 2, image_id: 1 },
-        { event_id: 2, image_id: 3 },
-        { event_id: 3, image_id: 3 },
+        { eventId: 1, imageId: 1 },
+        { eventId: 1, imageId: 2 },
+        { eventId: 2, imageId: 1 },
+        { eventId: 2, imageId: 3 },
+        { eventId: 3, imageId: 3 },
       ],
       {}
     );

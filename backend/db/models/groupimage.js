@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) { }
   }
   GroupImage.init({
-    image_id: {
+    imageId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    group_id: {
+    groupId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }

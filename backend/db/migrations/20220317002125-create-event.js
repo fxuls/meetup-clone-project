@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      group_id: {
+      groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      venue_id: {
+      venueId: {
         type: Sequelize.INTEGER,
       },
       name: {
@@ -32,19 +32,19 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL(9,2),
       },
-      start_date: {
+      startDate: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      end_date: {
+      endDate: {
         type: Sequelize.DATE,
       },
-      num_attending: {
+      numAttending: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0
       },
-      preview_image_id: {
+      previewImageId: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

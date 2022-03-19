@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      image_id: {
+      imageId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      group_id: {
+      groupId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

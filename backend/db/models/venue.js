@@ -5,12 +5,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Venue extends Model {
     static associate(models) {
-      Venue.belongsTo(models.Group, { foreignKey: "group_id" });
-      Venue.hasMany(models.Event, { foreignKey: "venue_id" });
+      Venue.belongsTo(models.Group, { foreignKey: "groupId" });
+      Venue.hasMany(models.Event, { foreignKey: "venueId" });
     }
   }
   Venue.init({
-    group_id: {
+    groupId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

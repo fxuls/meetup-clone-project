@@ -5,11 +5,11 @@ module.exports = {
     await queryInterface.bulkInsert(
       "Attendees",
       [
-        { user_id: 1, event_id: 1 },
-        { user_id: 1, event_id: 2 },
-        { user_id: 2, event_id: 1 },
-        { user_id: 2, event_id: 3 },
-        { user_id: 3, event_id: 3 },
+        { userId: 1, eventId: 1 },
+        { userId: 1, eventId: 2 },
+        { userId: 2, eventId: 1 },
+        { userId: 2, eventId: 3 },
+        { userId: 3, eventId: 3 },
       ],
       {}
     );

@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {}
   }
   Attendee.init({
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    event_id: {
+    eventId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }

@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      organizer_id: {
+      organizerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      preview_image_id: {
+      previewImageId: {
         type: Sequelize.INTEGER,
       },
       city: {
@@ -36,7 +36,7 @@ module.exports = {
       state: {
         type: Sequelize.STRING,
       },
-      num_members: {
+      numMembers: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },

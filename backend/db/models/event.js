@@ -3,29 +3,29 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     static associate(models) {
-      Event.belongsTo(models.Group, { foreignKey: "group_id" });
-      Event.hasOne(models.Image, { foreignKey: "preview_image_id" });
-      Event.belongsTo(models.Venue, { foreignKey: "venue_id" });
+      Event.belongsTo(models.Group, { foreignKey: "groupId" });
+      Event.hasOne(models.Image, { foreignKey: "previewImageId" });
+      Event.belongsTo(models.Venue, { foreignKey: "venueId" });
 
       Event.belongsToMany(models.User, {
         through: "Attendees",
-        foreignKey: "event_id",
+        foreignKey: "eventId",
       });
 
       Event.belongsToMany(models.Image, {
         through: "EventImages",
         as: "Images",
-        foreignKey: "event_id",
+        foreignKey: "eventId",
       });
     }
   }
   Event.init(
     {
-      group_id: {
+      groupId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      venue_id: {
+      venueId: {
         type: DataTypes.INTEGER,
       },
       name: {
@@ -45,19 +45,19 @@ module.exports = (sequelize, DataTypes) => {
       price: {
         type: DataTypes.DECIMAL,
       },
-      start_date: {
+      startDate: {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      end_date: {
+      endDate: {
         type: DataTypes.DATE,
       },
-      num_attending: {
+      numAttending: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
       },
-      preview_image_id: {
+      previewImageId: {
         type: DataTypes.INTEGER,
       },
     },

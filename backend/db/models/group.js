@@ -5,25 +5,25 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Group extends Model {
     static associate(models) {
-      Group.hasMany(models.Event, { foreignKey: "group_id" });
-      Group.belongsTo(models.User, { foreignKey: "organizer_id" });
-      Group.hasMany(models.Venue, { foreignKey: "group_id" });
-      Group.hasOne(models.Image, { foreignKey: "preview_image_id" });
+      Group.hasMany(models.Event, { foreignKey: "groupId" });
+      Group.belongsTo(models.User, { foreignKey: "organizerId", as: "Organizer" });
+      Group.hasMany(models.Venue, { foreignKey: "groupId" });
+      Group.belongsTo(models.Image, { foreignKey: "previewImageId", as: "PreviewImage" });
 
       Group.belongsToMany(models.User, {
         through: "Members",
-        foreignKey: "group_id",
+        foreignKey: "groupId",
       });
 
       Group.belongsToMany(models.Image, {
         through: "GroupImages",
         as: "Images",
-        foreignKey: "group_id",
+        foreignKey: "groupId",
       });
     }
   }
   Group.init({
-    organizer_id: {
+    organizerId: {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
@@ -42,8 +42,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.BOOLEAN,
     },
-    preview_image_id: {
+    previewImageId: {
       type: DataTypes.INTEGER,
+      references: { model: "Images" },
     },
     city: {
       type: DataTypes.STRING,
@@ -51,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     state: {
       type: DataTypes.STRING,
     },
-    num_members: {
+    numMembers: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
