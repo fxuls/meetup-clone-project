@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { Image, Group } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class GroupImage extends Model {
     static associate(models) { }
@@ -10,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     imageId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: { model: Image },
     },
     groupId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: { model: Group },
     }
   }, {
     sequelize,

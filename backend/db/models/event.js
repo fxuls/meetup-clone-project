@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Image, Group, Venue } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     static associate(models) {
@@ -24,9 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       groupId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: { model: Group },
       },
       venueId: {
         type: DataTypes.INTEGER,
+        references: { model: Venue },
       },
       name: {
         type: DataTypes.STRING,
@@ -59,6 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       previewImageId: {
         type: DataTypes.INTEGER,
+        references: { model: Image },
       },
     },
     {
