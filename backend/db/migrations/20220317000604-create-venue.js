@@ -11,6 +11,11 @@ module.exports = {
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Groups",
+          },
+        },
       },
       address: {
         allowNull: false,

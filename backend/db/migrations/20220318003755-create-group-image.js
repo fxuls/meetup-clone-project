@@ -11,10 +11,20 @@ module.exports = {
       imageId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: {
+            tableName: "Images",
+          },
+        },
       },
       groupId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: {
+            tableName: "Groups",
+          },
+        },
       },
       createdAt: {
         allowNull: false,

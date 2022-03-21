@@ -11,9 +11,19 @@ module.exports = {
       groupId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Groups",
+          },
+        },
       },
       venueId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Venues",
+          },
+        },
       },
       name: {
         allowNull: false,
@@ -46,6 +56,11 @@ module.exports = {
       },
       previewImageId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Images",
+          },
+        },
       },
       createdAt: {
         allowNull: false,

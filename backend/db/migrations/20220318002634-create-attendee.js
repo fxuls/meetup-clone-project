@@ -11,10 +11,20 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: {
+            tableName: "Users",
+          },
+        },
       },
       eventId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: {
+            tableName: "Events",
+          },
+        },
       },
       createdAt: {
         allowNull: false,

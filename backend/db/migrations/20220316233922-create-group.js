@@ -11,6 +11,11 @@ module.exports = {
       organizerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: {
+            tableName: "Users",
+          },
+        },
       },
       name: {
         type: Sequelize.STRING,
@@ -20,7 +25,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       type: {
-        type: Sequelize.ENUM('inperson', 'virtual'),
+        type: Sequelize.ENUM("inperson", "virtual"),
         allowNull: false,
       },
       private: {
@@ -29,6 +34,11 @@ module.exports = {
       },
       previewImageId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Images",
+          },
+        },
       },
       city: {
         type: Sequelize.STRING,
@@ -43,12 +53,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now'),
+        defaultValue: Sequelize.fn("now"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now'),
+        defaultValue: Sequelize.fn("now"),
       },
     });
   },
