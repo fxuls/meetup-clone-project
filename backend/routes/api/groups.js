@@ -13,7 +13,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const groups = await Group.findAll({
-      include: { model: Image, as: "images" },
+      include: { model: Image, as: "PreviewImage" },
     }); // TODO fix imagePreviewURL
     res.json({ Groups: groups });
   })
