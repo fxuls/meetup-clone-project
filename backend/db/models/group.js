@@ -5,24 +5,24 @@ const { Image, User } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class Group extends Model {
     static associate(models) {
-      // Group.hasMany(models.Event, { foreignKey: "groupId" });
-      // Group.belongsTo(models.User, { foreignKey: "organizerId", as: "Organizer" });
-      // Group.hasMany(models.Venue, { foreignKey: "groupId" });
+      Group.hasMany(models.Event, { foreignKey: "groupId" });
+      Group.belongsTo(models.User, { foreignKey: "organizerId", as: "Organizer" });
+      Group.hasMany(models.Venue, { foreignKey: "groupId" });
       Group.belongsTo(models.Image, {
         foreignKey: "previewImageId",
         as: "PreviewImage",
       });
 
-      // Group.belongsToMany(models.User, {
-      //   through: "Members",
-      //   foreignKey: "groupId",
-      // });
+      Group.belongsToMany(models.User, {
+        through: "Members",
+        foreignKey: "groupId",
+      });
 
-      // Group.belongsToMany(models.Image, {
-      //   through: "GroupImages",
-      //   as: "images",
-      //   foreignKey: "groupId",
-      // });
+      Group.belongsToMany(models.Image, {
+        through: "GroupImages",
+        as: "images",
+        foreignKey: "groupId",
+      });
     }
   }
   Group.init(
