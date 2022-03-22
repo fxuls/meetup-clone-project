@@ -25,6 +25,7 @@ module.exports = {
             tableName: "Events",
           },
         },
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,

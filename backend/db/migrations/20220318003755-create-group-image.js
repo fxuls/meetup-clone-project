@@ -25,6 +25,7 @@ module.exports = {
             tableName: "Groups",
           },
         },
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,
