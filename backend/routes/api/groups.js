@@ -13,8 +13,19 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const groups = await Group.findAll({
-      include: { model: Image, as: "PreviewImage" },
-    }); // TODO fix imagePreviewURL
+      include: { model: Image, as: "previewImage" },
+    });
+
+    // change previewImage to just the image url
+    groups.map((group) => {
+      const newGroup = group.toJSON();
+      delete newGroup.previewImageId;
+      if (newGroup.previewImage) {
+        newGroup.previewImage = group.previewImage.url;
+      }
+      return newGroup;
+    });
+
     res.json({ Groups: groups });
   })
 );
@@ -148,6 +159,58 @@ router.patch(
     const { name, about, type, private, city, state } = req.body;
     await group.update({ name, about, type, private, city, state });
     res.json(group);
+  })
+);
+
+// delete a group
+router.delete(
+  "/:groupId(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const groupId = req.params.groupId;
+    const group = await Group.findByPk(groupId);
+
+    // check that group exists
+    if (!group) {
+      res.status(404);
+      return res.json({
+        message: "Group couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // check that user is group organizer
+    if (group.organizerId !== userId) {
+      throw unauthorizedError();
+    }
+
+    await group.destroy();
+    res.status(200);
+    res.json({ message: "Successfuly deleted", statusCode: 200 });
+  })
+);
+
+// get members of a group by groupId
+router.get(
+  "/:groupId(\\d+)/members",
+  asyncHandler(async (req, res) => {
+    const groupId = req.params.groupId;
+    const group = await Group.findByPk(groupId, { include: "Members" });
+
+    // check that group exists
+    if (!group) {
+      res.status(404);
+      return res.json({
+        message: "Group couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // check if user is logged in
+    if (req.user) {
+
+    }
   })
 );
 
