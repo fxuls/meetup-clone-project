@@ -6,17 +6,17 @@ module.exports = (sequelize, DataTypes) => {
   class Image extends Model {
     static associate(models) {
       Image.hasMany(models.Group, { foreignKey: "previewImageId" });
-      // Image.belongsTo(models.Event, { foreignKey: "previewImageId" });
+      Image.hasMany(models.Event, { foreignKey: "previewImageId" });
 
-      // Image.belongsToMany(models.Group, {
-      //   through: "GroupImages",
-      //   foreignKey: "imageId",
-      // });
+      Image.belongsToMany(models.Group, {
+        through: "GroupImage",
+        foreignKey: "imageId",
+      });
 
-      // Image.belongsToMany(models.Event, {
-      //   through: "EventImages",
-      //   foreignKey: "imageId",
-      // });
+      Image.belongsToMany(models.Event, {
+        through: "EventImage",
+        foreignKey: "imageId",
+      });
     }
   }
   Image.init({

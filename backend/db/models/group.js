@@ -1,26 +1,33 @@
 "use strict";
 const { Model } = require("sequelize");
-const { Image, User } = require(".");
 
 module.exports = (sequelize, DataTypes) => {
   class Group extends Model {
     static associate(models) {
-      Group.hasMany(models.Event, { foreignKey: "groupId" });
-      Group.belongsTo(models.User, { foreignKey: "organizerId", as: "Organizer" });
-      Group.hasMany(models.Venue, { foreignKey: "groupId" });
+      Group.hasMany(models.Event, {
+        foreignKey: "groupId",
+      });
+      Group.hasMany(models.Venue, {
+        foreignKey: "groupId",
+      });
+
+      Group.belongsTo(models.User, {
+        foreignKey: "organizerId",
+        as: "Organizer",
+      });
       Group.belongsTo(models.Image, {
         foreignKey: "previewImageId",
-        as: "PreviewImage",
+        as: "previewImage",
       });
 
       Group.belongsToMany(models.User, {
-        through: "Members",
+        through: "Member",
         foreignKey: "groupId",
       });
 
       Group.belongsToMany(models.Image, {
-        through: "GroupImages",
-        as: "images",
+        through: "GroupImage",
+        as: "groupImages",
         foreignKey: "groupId",
       });
     }
@@ -30,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       organizerId: {
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: { model: User },
+        references: { model: "Users" },
       },
       name: {
         allowNull: false,
@@ -49,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       previewImageId: {
         type: DataTypes.INTEGER,
-        references: { model: Image },
+        references: { model: "Images" },
       },
       city: {
         type: DataTypes.STRING,

@@ -1,21 +1,22 @@
 "use strict";
 const { Model } = require("sequelize");
-const { Image, Group, Venue } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     static associate(models) {
       Event.belongsTo(models.Group, { foreignKey: "groupId" });
-      Event.hasOne(models.Image, { foreignKey: "previewImageId" });
+      Event.belongsTo(models.Image, { foreignKey: "previewImageId", as: "previewImage" });
       Event.belongsTo(models.Venue, { foreignKey: "venueId" });
 
       Event.belongsToMany(models.User, {
-        through: "Attendees",
+        through: "Attendee",
         foreignKey: "eventId",
+        // onDelete: "cascade",
+        // hooks: true,
       });
 
       Event.belongsToMany(models.Image, {
-        through: "EventImages",
-        as: "Images",
+        through: "EventImage",
+        as: "eventImages",
         foreignKey: "eventId",
       });
     }
@@ -25,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       groupId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: Group },
+        references: { model: "Groups" },
       },
       venueId: {
         type: DataTypes.INTEGER,
-        references: { model: Venue },
+        references: { model: "Venues" },
       },
       name: {
         type: DataTypes.STRING,
@@ -62,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       previewImageId: {
         type: DataTypes.INTEGER,
-        references: { model: Image },
+        references: { model: "Images" },
       },
     },
     {

@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const { Group } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class Venue extends Model {
     static associate(models) {
@@ -14,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     groupId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: Group },
+      references: { model: "Groups" },
     },
     address: {
       type: DataTypes.STRING,

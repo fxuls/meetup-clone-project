@@ -1,26 +1,26 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const { Event, Image } = require(".");
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class EventImage extends Model {
     static associate(models) {}
   }
-  EventImage.init({
-    imageId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: { model: Image },
+  EventImage.init(
+    {
+      imageId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "Images" },
+      },
+      eventId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "Events" },
+      },
     },
-    eventId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: { model: Event },
+    {
+      sequelize,
+      modelName: "EventImage",
     }
-  }, {
-    sequelize,
-    modelName: 'EventImage',
-  });
+  );
   return EventImage;
 };

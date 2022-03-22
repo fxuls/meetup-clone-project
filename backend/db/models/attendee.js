@@ -1,21 +1,22 @@
 "use strict";
 const { Model } = require("sequelize");
-const { User, Event } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class Attendee extends Model {
-    static associate(models) {}
+    static associate(models) {
+
+    }
   }
   Attendee.init(
     {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: User },
+        references: { model: "Users" },
       },
       eventId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: { model: Event },
+        references: { model: "Events" },
       },
     },
     {
