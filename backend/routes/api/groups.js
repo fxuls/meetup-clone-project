@@ -8,6 +8,15 @@ const { requireAuth, unauthorizedError } = require("../../utils/auth");
 
 const router = express.Router();
 
+const previewImageToUrl = (group) => {
+  const newGroup = group.toJSON();
+  delete newGroup.previewImageId;
+  if (newGroup.previewImage) {
+    newGroup.previewImage = group.previewImage.url;
+  }
+  return newGroup;
+};
+
 // get all groups
 router.get(
   "/",
@@ -17,14 +26,7 @@ router.get(
     });
 
     // change previewImage to just the image url
-    groups.map((group) => {
-      const newGroup = group.toJSON();
-      delete newGroup.previewImageId;
-      if (newGroup.previewImage) {
-        newGroup.previewImage = group.previewImage.url;
-      }
-      return newGroup;
-    });
+    groups.map(previewImageToUrl);
 
     res.json({ Groups: groups });
   })
@@ -57,9 +59,9 @@ router.get(
     // find all groups user is member in
     const userId = req.user.id;
     const user = await User.findByPk(userId, {
-      include: { model: Group, as: "Memberships" },
+      include: { model: Group, as: "Memberships", include: "previewImage" },
     });
-    const memberships = user.Memberships;
+    let memberships = user.Memberships;
 
     // find all groups user is organizer of
     const organizerGroups = await Group.findAll({
@@ -73,6 +75,9 @@ router.get(
     organizerGroups.forEach((group) => {
       if (!membershipGroupIds.includes(group.id)) memberships.push(group);
     });
+
+    // convert the previewImages to urls
+    memberships = memberships.map(previewImageToUrl);
 
     res.json({ Groups: memberships });
   })
@@ -204,7 +209,6 @@ router.get(
 
     // check if user is logged in
     if (req.user) {
-
     }
   })
 );
