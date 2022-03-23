@@ -3,8 +3,8 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 const { handleValidationErrors } = require("../../utils/validation");
-const { Group, Image, Venue, Event, User } = require("../../db/models");
-const { requireAuth, unauthorizedError } = require("../../utils/auth");
+const { Group, Image, User, Member } = require("../../db/models");
+const { requireAuth, unauthorizedError, restoreUser } = require("../../utils/auth");
 
 const router = express.Router();
 
@@ -194,9 +194,12 @@ router.delete(
 // get members of a group by groupId
 router.get(
   "/:groupId(\\d+)/members",
+  restoreUser,
   asyncHandler(async (req, res) => {
     const groupId = req.params.groupId;
-    const group = await Group.findByPk(groupId, { include: "Members" });
+    const group = await Group.findByPk(groupId, {
+      include: { model: User, as: "members" },
+    });
 
     // check that group exists
     if (!group) {
@@ -207,9 +210,21 @@ router.get(
       });
     }
 
-    // check if user is logged in
-    if (req.user) {
+    // map the models into json objects
+    let members = group.members.map((user) => user.toJSON());
+
+    // filter the member object to a Membership attribute with their status
+    members.forEach((user) => {
+      user.Membership = { status: user.Member.status };
+      delete user.Member;
+    });
+
+    // if user is not organizer filter out members without status member
+    if (!req.user || req.user.id !== group.organizerId) {
+      members = members.filter((member) => member.Membership.status === "member");
     }
+
+    res.json({ Members: members });
   })
 );
 
