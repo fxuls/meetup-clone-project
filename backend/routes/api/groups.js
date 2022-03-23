@@ -38,11 +38,6 @@ router.get(
     const group = await Group.findByPk(groupId, { include: ["Organizer"] }); // TODO add images and previewImageURL
 
     if (!group) {
-      // not the correct way to do it
-      // const err = new Error("Group couldn't be found");
-      // err.status = 404;
-      // throw err;
-
       res.status(404);
       return res.json({
         message: "Group couldn't be found",
