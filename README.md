@@ -1240,6 +1240,7 @@ Creates and returns a new event for a group specified by its id
     {
       "venueId": 1,
       "name": "Tennis Group First Meet and Greet",
+      "description": "Our first meet and greet for tennis group",
       "type": "Online",
       "capacity": 10,
       "price": 18.5,
@@ -1261,6 +1262,7 @@ Creates and returns a new event for a group specified by its id
       "groupId": 1,
       "venueId": 1,
       "name": "Tennis Group First Meet and Greet",
+      "description": "Our first meet and greet for tennis group",
       "type": "Online",
       "capacity": 10,
       "price": 18.5,
@@ -1311,6 +1313,7 @@ Edit and returns an event specified by its id
     {
       "venueId": 1,
       "name": "Tennis Group First Meet and Greet",
+      "description": "Our first meet and greet for tennis group",
       "type": "Online",
       "capacity": 10,
       "price": 18.5,
@@ -1332,6 +1335,7 @@ Edit and returns an event specified by its id
       "groupId": 1,
       "venueId": 1,
       "name": "Tennis Group First Meet and Greet",
+      "description": "Our first meet and greet for tennis group",
       "type": "Online",
       "capacity": 10,
       "price": 18.5,
