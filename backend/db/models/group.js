@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       Group.belongsToMany(models.User, {
         through: "Member",
         foreignKey: "groupId",
+        as: "members"
       });
 
       Group.belongsToMany(models.Image, {
