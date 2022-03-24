@@ -62,4 +62,25 @@ router.get(
   })
 );
 
+// get all events of a group by groupId
+router.get(
+  "/groups/:groupId(\\d+)/events",
+  asyncHandler(async (req, res) => {
+    const { groupId } = req.params;
+
+    const group = await Group.findByPk(groupId, { include: ["Organizer"] }); // TODO add images and previewImageURL
+    if (!group) {
+      res.status(404);
+      return res.json({
+        message: "Group couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    let events = await Event.findAll({ where: { groupId } });
+
+    res.json({ Events: events });
+  })
+);
+
 module.exports = router;
