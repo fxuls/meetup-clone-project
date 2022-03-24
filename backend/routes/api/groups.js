@@ -332,7 +332,8 @@ router.patch(
     // if changing status to member check that user is co-host or organizer
     if (
       req.body.status === "member" &&
-      (!isOrganizer && userStatus !== "co-host")
+      !isOrganizer &&
+      userStatus !== "co-host"
     ) {
       return res.json({
         message:
@@ -362,7 +363,55 @@ router.patch(
     }
 
     await membership.update({ status: req.body.status });
-    res.json({ memberId: membership.userId, groupId: membership.groupId, status: membership.status });
+    res.json({
+      memberId: membership.userId,
+      groupId: membership.groupId,
+      status: membership.status,
+    });
+  })
+);
+
+// delete membership from a group
+router.delete(
+  "/:groupId(\\d+)/members/:memberId(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const groupId = req.params.groupId;
+    const memberId = req.params.memberId;
+    const group = await Group.findByPk(groupId);
+    debugger;
+
+    // check that group exists
+    if (!group) {
+      res.status(404);
+      return res.json({
+        message: "Group couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // confirm that user is organizer or user who is being deleted
+    if (userId != memberId && userId !== group.organizerId) {
+      throw unauthorizedError();
+    }
+
+    const membership = await Member.findOne({
+      where: { groupId: groupId, userId: memberId },
+    });
+
+    if (!membership) {
+      return res.json({
+        message: "User is not a member of the group",
+        statusCode: 400,
+      });
+    }
+
+    await membership.destroy();
+
+    res.json({
+      message: "Successfully deleted membership from group",
+    });
   })
 );
 
