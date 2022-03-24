@@ -9,28 +9,20 @@ const {
   unauthorizedError,
   restoreUser,
 } = require("../../utils/auth");
+const { previewImageToUrl } = require("../../utils");
 
 const router = express.Router();
-
-const previewImageToUrl = (group) => {
-  const newGroup = group.toJSON();
-  delete newGroup.previewImageId;
-  if (newGroup.previewImage) {
-    newGroup.previewImage = group.previewImage.url;
-  }
-  return newGroup;
-};
 
 // get all groups
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const groups = await Group.findAll({
+    let groups = await Group.findAll({
       include: { model: Image, as: "previewImage" },
     });
 
     // change previewImage to just the image url
-    groups.map(previewImageToUrl);
+    groups = groups.map(previewImageToUrl);
 
     res.json({ Groups: groups });
   })
