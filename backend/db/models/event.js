@@ -10,8 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       Event.belongsToMany(models.User, {
         through: "Attendee",
         foreignKey: "eventId",
-        // onDelete: "cascade",
-        // hooks: true,
       });
 
       Event.belongsToMany(models.Image, {
