@@ -9,7 +9,7 @@ const {
   unauthorizedError,
   restoreUser,
 } = require("../../utils/auth");
-const { previewImageToUrl } = require("../../utils");
+const { previewImageToUrl, imagesToUrls } = require("../../utils");
 
 const router = express.Router();
 
@@ -33,8 +33,14 @@ router.get(
   "/:groupId(\\d+)",
   asyncHandler(async (req, res) => {
     const { groupId } = req.params;
-    const group = await Group.findByPk(groupId, { include: ["Organizer"] }); // TODO add images and previewImageURL
+    let group = await Group.findByPk(groupId, {
+      include: [
+        { model: User, as: "Organizer" },
+        { model: Image, as: "groupImages" },
+      ],
+    });
 
+    // check if group exists
     if (!group) {
       res.status(404);
       return res.json({
@@ -42,8 +48,13 @@ router.get(
         statusCode: 404,
       });
     }
+    // convert group to json
+    group = group.toJSON();
 
-    res.json({ group });
+    // convert Image models to urls
+    group.groupImages = imagesToUrls(group.groupImages);
+
+    res.json(group);
   })
 );
 
