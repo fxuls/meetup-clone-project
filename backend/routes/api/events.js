@@ -40,7 +40,17 @@ router.get(
       });
     }
 
-    let events = await Event.findAll({ where: { groupId } });
+    let events = await Event.findAll({
+      where: { groupId },
+      include: [
+        { model: Group.scope("simple") },
+        { model: Image, as: "previewImage" },
+        { model: Venue.scope("simple") },
+      ],
+    });
+
+    // change previewImage to just the image url
+    events = events.map(previewImageToUrl);
 
     res.json({ Events: events });
   })
