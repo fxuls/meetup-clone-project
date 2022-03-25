@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 const { Group, Venue } = require("../../db/models");
-const { requireAuth, getMembershipStatus } = require("../../utils/auth");
+const { requireAuth, hasElevatedMembership } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
@@ -40,9 +40,7 @@ router.post(
     }
 
     // verify user has permission
-    const isOrganizer = group.organizerId === userId;
-    const status = getMembershipStatus(userId, groupId);
-    if (!isOrganizer && status != "co-host") {
+    if (!hasElevatedMembership(userId, groupId)) {
       return res.json({
         message:
           "Current User must be the organizer or a co-host to add a venue",
