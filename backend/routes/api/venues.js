@@ -40,7 +40,7 @@ router.post(
     }
 
     // verify user has permission
-    if (!hasElevatedMembership(userId, groupId)) {
+    if (!(await hasElevatedMembership(userId, groupId))) {
       return res.json({
         message:
           "Current User must be the organizer or a co-host to add a venue",
@@ -58,6 +58,42 @@ router.post(
     });
 
     res.json(newVenue);
+  })
+);
+
+// edit a venue by venueId
+router.patch(
+  "/venues/:venueId(\\d+)",
+  requireAuth,
+  validateVenue,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { venueId } = req.params;
+    const venue = await Venue.findByPk(venueId);
+
+    // check that venue exists
+    if (!venue) {
+      res.status(404);
+      return res.json({
+        message: "Venue couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // verify user has permission
+    if (!(await hasElevatedMembership(userId, venue.groupId))) {
+      return res.json({
+        message:
+          "Current User must be the organizer or a co-host to add a venue",
+        statusCode: 400,
+      });
+    }
+
+    // update the venue and return it
+    const { address, city, state, lat, lng } = req.body;
+    await venue.update({ address, city, state, lat, lng });
+
+    res.json(venue);
   })
 );
 
