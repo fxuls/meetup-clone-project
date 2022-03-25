@@ -19,6 +19,7 @@ const validateVenue = [
   handleValidationErrors,
 ];
 
+// create event for group with groupId
 router.post(
   "/groups/:groupId(\\d+)/venues",
   requireAuth,
@@ -61,4 +62,5 @@ router.post(
     res.json(newVenue);
   })
 );
+
 module.exports = router;
