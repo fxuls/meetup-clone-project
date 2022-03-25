@@ -90,7 +90,7 @@ router.get(
   })
 );
 
-validateGroup = [
+const validateGroup = [
   check("name")
     .exists({ checkFalsy: true })
     .withMessage("Name cannot be blank."),
