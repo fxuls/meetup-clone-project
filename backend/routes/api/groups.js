@@ -98,19 +98,19 @@ const validateGroup = [
     .isLength({ max: 60 })
     .withMessage("Name must be 60 characters or fewer."),
   check("about")
-    .exists()
+    .exists({ checkFalsy: true })
     .isLength({ min: 50 })
     .withMessage("About must be 50 characters or more."),
   check("type")
-    .exists()
+    .exists({ checkFalsy: true })
     .isIn(["inperson", "virtual"])
     .withMessage("Type must be virtual or inperson."),
   check("private")
-    .exists()
+    .exists({ checkFalsy: true })
     .isBoolean()
     .withMessage("Private must be a boolean."),
-  check("city").exists().withMessage("City is required."),
-  check("state").exists().withMessage("State is required."),
+  check("city").exists({ checkFalsy: true }).withMessage("City is required."),
+  check("state").exists({ checkFalsy: true }).withMessage("State is required."),
   handleValidationErrors,
 ];
 
