@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { jwtConfig } = require("../config");
-const { User } = require("../db/models");
+const { User, Member } = require("../db/models");
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -64,9 +64,15 @@ const requireAuth = [
   },
 ];
 
+const getMembershipStatus = async (userId, groupId) => {
+  const membership = await Member.findOne({ where: { userId, groupId } });
+  return membership.status ? membership.status : null;
+}
+
 module.exports = {
   setTokenCookie,
   restoreUser,
   requireAuth,
   unauthorizedError,
+  getMembershipStatus,
 };
