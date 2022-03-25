@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     static associate(models) {
       Event.belongsTo(models.Group, { foreignKey: "groupId" });
-      Event.belongsTo(models.Image, { foreignKey: "previewImageId", as: "previewImage" });
+      Event.belongsTo(models.Image, {
+        foreignKey: "previewImageId",
+        as: "previewImage",
+      });
       Event.belongsTo(models.Venue, { foreignKey: "venueId" });
 
       Event.belongsToMany(models.User, {
@@ -65,6 +68,25 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      defaultScope: {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+      scopes: {
+        simple: {
+          attributes: [
+            "id",
+            "groupId",
+            "venueId",
+            "name",
+            "type",
+            "startDate",
+            "numAttending",
+            "previewImageId",
+          ],
+        },
+      },
       sequelize,
       modelName: "Event",
     }

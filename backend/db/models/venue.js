@@ -36,6 +36,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     }
   }, {
+    defaultScope: {
+      attributes: {
+        exclude: ["createdAt", "updatedAt"]
+      }
+    },
+    scopes: {
+      simple: {
+        attributes: ["id", "city", "state"]
+      }
+    },
     sequelize,
     modelName: 'Venue',
   });
