@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { jwtConfig } = require("../config");
-const { User, Member } = require("../db/models");
+const { User, Member, Group } = require("../db/models");
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -69,10 +69,20 @@ const getMembershipStatus = async (userId, groupId) => {
   return membership.status ? membership.status : null;
 }
 
+// check if user is organizer or co-host
+const hasElevatedMembership = async (userId, groupId) => {
+  const group = await Group.findByPk(groupId);
+  const isOrganizer = group.organizerId === userId;
+
+  const memberStatus = getMembershipStatus(userId, groupId);
+  return isOrganizer || memberStatus === "co-host";
+}
+
 module.exports = {
   setTokenCookie,
   restoreUser,
   requireAuth,
   unauthorizedError,
   getMembershipStatus,
+  hasElevatedMembership,
 };
