@@ -66,7 +66,7 @@ const requireAuth = [
 
 const getMembershipStatus = async (userId, groupId) => {
   const membership = await Member.findOne({ where: { userId, groupId } });
-  return membership.status ? membership.status : null;
+  return membership ? membership.status : null;
 }
 
 // check if user is organizer or co-host
@@ -74,7 +74,8 @@ const hasElevatedMembership = async (userId, groupId) => {
   const group = await Group.findByPk(groupId);
   const isOrganizer = group.organizerId === userId;
 
-  const memberStatus = getMembershipStatus(userId, groupId);
+  const memberStatus = await getMembershipStatus(userId, groupId);
+  debugger;
   return isOrganizer || memberStatus === "co-host";
 }
 
