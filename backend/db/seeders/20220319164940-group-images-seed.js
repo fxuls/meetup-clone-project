@@ -7,9 +7,9 @@ module.exports = {
       [
         { groupId: 1, imageId: 1 },
         { groupId: 1, imageId: 2 },
-        { groupId: 2, imageId: 1 },
         { groupId: 2, imageId: 3 },
-        { groupId: 3, imageId: 3 },
+        { groupId: 2, imageId: 4 },
+        { groupId: 3, imageId: 5 },
       ],
       {}
     );
