@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Image.hasMany(models.Group, { foreignKey: "previewImageId" });
       Image.hasMany(models.Event, { foreignKey: "previewImageId" });
+      Image.belongsTo(models.User, { foreignKey: "ownerId" });
 
       Image.belongsToMany(models.Group, {
         through: "GroupImage",
@@ -23,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
     url: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    ownerId: {
+      type: DataTypes.INTEGER,
     }
   }, {
     sequelize,
