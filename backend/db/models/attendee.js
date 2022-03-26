@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: { model: "Events" },
       },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "member",
+      },
     },
     {
       sequelize,
