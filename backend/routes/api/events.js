@@ -214,4 +214,33 @@ router.patch(
   })
 );
 
+// delete an event by its eventId
+router.delete(
+  "/events/:eventId(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { eventId } = req.params;
+
+    const event = await Event.findByPk(eventId);
+
+    // check that group exists
+    if (!event) {
+      res.status(404);
+      return res.json({
+        message: "Event couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // check if user has elevated membership in group
+    const elevatedMembership = await hasElevatedMembership(userId, groupId);
+    if (!elevatedMembership) throw unauthorizedError();
+
+    await event.destroy();
+
+    res.json({ message: "Successfully deleted" });
+  })
+);
+
 module.exports = router;
