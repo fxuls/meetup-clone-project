@@ -1401,7 +1401,7 @@ Returns the attendees of an event specified by its id.
 - Request
 
   - Method: GET
-  - URL: /events/:eventId/atendees
+  - URL: /events/:eventId/attendees
   - Body: none
 
 - Successful Response: If you ARE the organizer of the group or a member of the
@@ -1499,7 +1499,7 @@ Request attendance for an event specified by id.
 - Request
 
   - Method: POST
-  - URL: /events/:eventId/atendees
+  - URL: /events/:eventId/attendees
   - Headers:
     - Content-Type: application/json
   - Body: none
@@ -1572,7 +1572,7 @@ Change the status of an attendance for an event specified by id.
 - Request
 
   - Method: PATCH
-  - URL: /events/:eventId/atendees
+  - URL: /events/:eventId/attendees
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1652,7 +1652,7 @@ Delete a attendance to a event specified by id.
 - Request
 
   - Method: DELETE
-  - URL: /events/:eventId/atendees/:atendeeId
+  - URL: /events/:eventId/attendees/:attendeeId
   - Headers:
     - Content-Type: application/json
   - Body: none
