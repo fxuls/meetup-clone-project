@@ -4,7 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class GroupImage extends Model {
-    static associate(models) { }
+    static associate(models) {
+      GroupImage.belongsTo(models.Image, { foreignKey: "imageId" });
+    }
   }
   GroupImage.init({
     imageId: {
