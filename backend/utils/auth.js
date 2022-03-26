@@ -75,7 +75,6 @@ const hasElevatedMembership = async (userId, groupId) => {
   const isOrganizer = group.organizerId === userId;
 
   const memberStatus = await getMembershipStatus(userId, groupId);
-  debugger;
   return isOrganizer || memberStatus === "co-host";
 }
 
