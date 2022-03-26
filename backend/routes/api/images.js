@@ -17,6 +17,7 @@ const {
 
 const router = express.Router();
 
+// add image to event
 router.post(
   "/events/:eventId(\\d+)/images",
   requireAuth,
@@ -62,6 +63,7 @@ router.post(
   })
 );
 
+// add image to group
 router.post(
   "/groups/:groupId(\\d+)/images",
   requireAuth,
