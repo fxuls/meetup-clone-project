@@ -16,6 +16,7 @@ module.exports = {
             tableName: "Images",
           },
         },
+        onDelete: "cascade",
       },
       eventId: {
         type: Sequelize.INTEGER,

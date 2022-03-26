@@ -16,6 +16,7 @@ module.exports = {
             tableName: "Images",
           },
         },
+        onDelete: "cascade",
       },
       groupId: {
         type: Sequelize.INTEGER,
