@@ -7,7 +7,7 @@ const {
   Image,
   EventImage,
   Attendee,
-  GroupImage
+  GroupImage,
 } = require("../../db/models");
 const {
   requireAuth,
@@ -41,15 +41,24 @@ router.post(
     const attendance = await Attendee.findOne({ where: { userId, eventId } });
     if (!attendance) throw unauthorizedError();
 
-    // check if image with url exists
-    let image = await Image.findOne({ where: { url } });
-    // if image does not exist create Image object
-    if (!image) image = await Image.create({ url });
-
-    // check if image is already added to event
+    // get all eventImages that match eventId and the provided url
     let eventImage = await EventImage.findOne({
-      where: { eventId, imageId: image.id },
+      where: { eventId, "$Image.url$": url },
+      include: { model: Image, required: true },
     });
+
+    // if image url already exists for event send bad request error
+    if (eventImage) {
+      res.status(400);
+      return res.json({
+        message: `Image with url ${url} already exists for event with eventId ${eventId}`,
+        statusCode: 400,
+      });
+    }
+
+    // create Image object
+    const image = await Image.create({ url });
+
     // if eventImage does not exist create EventImage
     if (!eventImage)
       eventImage = await EventImage.create({ eventId, imageId: image.id });
@@ -86,15 +95,24 @@ router.post(
     // check that user is organizer of group
     if (userId !== group.organizerId) throw unauthorizedError();
 
-    // check if image with url exists
-    let image = await Image.findOne({ where: { url } });
-    // if image does not exist create Image object
-    if (!image) image = await Image.create({ url });
-
-    // check if image is already added to group
+    // get all eventImages that match eventId and the provided url
     let groupImage = await GroupImage.findOne({
-      where: { groupId, imageId: image.id },
+      where: { groupId, "$Image.url$": url },
+      include: { model: Image, required: true },
     });
+
+    // if image url already exists for event send bad request error
+    if (groupImage) {
+      res.status(400);
+      return res.json({
+        message: `Image with url ${url} already exists for group with groupId ${groupId}`,
+        statusCode: 400,
+      });
+    }
+
+    // create Image object
+    const image = await Image.create({ url });
+
     // if groupImage does not exist create GroupImage
     if (!groupImage)
       groupImage = await GroupImage.create({ groupId, imageId: image.id });
