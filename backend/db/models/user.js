@@ -6,8 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Group, {
         foreignKey: "organizerId",
-        // onDelete: "cascade",
-        // hooks: true,
       });
 
       User.belongsToMany(models.Group, {
