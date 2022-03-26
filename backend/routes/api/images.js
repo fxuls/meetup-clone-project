@@ -126,4 +126,47 @@ router.post(
   })
 );
 
+// delete image by id
+router.delete(
+  "/images/:imageId(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { imageId } = req.params;
+
+    // check that image exists
+    const image = await Image.findByPk(imageId);
+    if (!image) {
+      res.status(404);
+      return res.json({
+        message: "Image couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // get entry from relevant join table (image id can only appear in one or other)
+    const groupImage = await GroupImage.findOne({ where: { imageId } });
+    const eventImage = await EventImage.findOne({ where: { imageId } });
+
+    // get relevant groupId
+    const groupId = groupImage ? groupImage.groupId : eventImage.groupId;
+
+    // get group
+    //const group = await Group.findByPk(groupId);
+
+    // check if user has elevated membership in group
+    const elevatedMembership = await hasElevatedMembership(userId, groupId);
+    if (!elevatedMembership) throw unauthorizedError();
+
+    // delete the image
+    // relevant entries in joins tables should be deleted automatically due to cascading
+    await image.destroy();
+
+    res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  })
+);
+
 module.exports = router;
