@@ -13,16 +13,6 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
-      ownerId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "Users",
-          },
-        },
-        onDelete: "cascade",
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
