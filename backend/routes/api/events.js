@@ -2,9 +2,20 @@ const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
-const { Event, Group, Image, Venue } = require("../../db/models");
+const {
+  Event,
+  Group,
+  Image,
+  Venue,
+  Attendee,
+  User,
+} = require("../../db/models");
 const { previewImageToUrl, imagesToUrls } = require("../../utils");
-const { requireAuth, hasElevatedMembership } = require("../../utils/auth");
+const {
+  requireAuth,
+  hasElevatedMembership,
+  restoreUser,
+} = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
@@ -240,6 +251,46 @@ router.delete(
     await event.destroy();
 
     res.json({ message: "Successfully deleted" });
+  })
+);
+
+// get all attendees of an event by its eventId
+router.get(
+  "/events/:eventId(\\d+)/attendees",
+  restoreUser,
+  asyncHandler(async (req, res) => {
+    const eventId = req.params.eventId;
+
+    const event = await Event.findByPk(eventId, {
+      include: { model: User, as: "attendees" },
+    });
+
+    // check that event exists
+    if (!event) {
+      res.status(404);
+      return res.json({
+        message: "Event couldn't be found",
+        statusCode: 404,
+      });
+    }
+    
+    // map models into json objects
+    let attendees = event.attendees.map((user) => user.toJSON());
+
+    attendees.forEach((user) => {
+      user.Attendance = { status: user.Attendee.status };
+      delete user.Attendee;
+    });
+
+    // if user is not organizer or co-host filter out attendees with status pending
+    if (req.user) {
+      const elevatedMembership = await hasElevatedMembership(req.user.id, event.groupId);
+      if (!elevatedMembership) {
+        attendees = attendees.filter((attendee) => attendee.Attendance.status !== "pending");
+      };
+    }
+
+    res.json({ Attendees: attendees });
   })
 );
 
