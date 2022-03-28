@@ -9,12 +9,14 @@ const {
   Venue,
   Attendee,
   User,
+  Member,
 } = require("../../db/models");
 const { previewImageToUrl, imagesToUrls } = require("../../utils");
 const {
   requireAuth,
   hasElevatedMembership,
   restoreUser,
+  unauthorizedError,
 } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -273,7 +275,7 @@ router.get(
         statusCode: 404,
       });
     }
-    
+
     // map models into json objects
     let attendees = event.attendees.map((user) => user.toJSON());
 
@@ -284,13 +286,175 @@ router.get(
 
     // if user is not organizer or co-host filter out attendees with status pending
     if (req.user) {
-      const elevatedMembership = await hasElevatedMembership(req.user.id, event.groupId);
+      const elevatedMembership = await hasElevatedMembership(
+        req.user.id,
+        event.groupId
+      );
       if (!elevatedMembership) {
-        attendees = attendees.filter((attendee) => attendee.Attendance.status !== "pending");
-      };
+        attendees = attendees.filter(
+          (attendee) => attendee.Attendance.status !== "pending"
+        );
+      }
     }
 
     res.json({ Attendees: attendees });
+  })
+);
+
+// request to attend event by eventId
+router.post(
+  "/events/:eventId(\\d+)/attendees",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { eventId } = req.params;
+
+    const event = await Event.findByPk(eventId);
+
+    // check that event exists
+    if (!event) {
+      res.status(404);
+      return res.json({
+        message: "Event couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    const groupId = event.groupId;
+
+    // check that user is a member of group
+    const membership = await Member.findOne({ where: { userId, groupId } });
+    if (!membership) throw unauthorizedError();
+
+    // check if attendance already exists
+    const attendance = await Attendee.findOne({ where: { eventId, userId } });
+    if (attendance) {
+      const status = attendance.status;
+      res.status(400);
+
+      // if user is already attending
+      if (status === "member") {
+        return res.json({
+          message: "User is already an attendee of the event",
+          statusCode: 400,
+        });
+      }
+
+      // if user is pending or waitlisted
+      return res.json({
+        message: "Attendance has already been requested",
+        statusCode: 400,
+      });
+    }
+
+    // create attendance with status pending
+    const newAttendance = await Attendee.create({
+      eventId,
+      userId,
+      status: "pending",
+    });
+
+    res.json(newAttendance);
+  })
+);
+
+// change status of attendance by eventId
+router.patch(
+  "/events/:eventId(\\d+)/attendees",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { eventId } = req.params;
+
+    const event = await Event.findByPk(eventId);
+
+    // check that event exists
+    if (!event) {
+      res.status(404);
+      return res.json({
+        message: "Event couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    const groupId = event.groupId;
+
+    // check user has elevated membership
+    const elevatedMembership = await hasElevatedMembership(userId, groupId);
+    if (!elevatedMembership) throw unauthorizedError();
+
+    const attendeeId = req.body.userId;
+    const newStatus = req.body.status;
+
+    // get attendance
+    const attendance = await Attendee.findOne({
+      where: { userId: attendeeId, eventId },
+    });
+
+    // if attendance doesn't exist
+    if (!attendance) {
+      res.status(404);
+      return res.json({
+        message: "Attendance between the user and the event does not exist",
+        statusCode: 404,
+      });
+    }
+
+    // if trying to change status to pending
+    if (newStatus === "pending") {
+      res.status(400);
+      return res.json({
+        message: "Cannot change an attendance status to pending",
+        statusCode: 400,
+      });
+    }
+
+    // update attendance and return
+    await attendance.update({ status: newStatus });
+
+    return res.json({
+      id: attendance.id,
+      userId: attendance.userId,
+      eventId: attendance.eventId,
+      status: attendance.status,
+    });
+  })
+);
+
+// delete attendance of an event by eventId
+router.delete(
+  "/events/:eventId(\\d+)/attendees/:attendeeId(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { eventId, attendeeId } = req.params;
+    debugger;
+
+    const event = await Event.findByPk(eventId, { include: Group });
+
+    // check that event exists
+    if (!event) {
+      res.status(404);
+      return res.json({
+        message: "Event couldn't be found",
+        statusCode: 404,
+      });
+    }
+
+    // check that user is attendee being deleted or organizer of group
+    if (userId != attendeeId && userId != event.Group.organizerId) {
+      throw unauthorizedError();
+    }
+
+    // get attendance and destroy it
+    const attendance = await Attendee.findOne({
+      where: { userId: attendeeId, eventId },
+    });
+    if (attendance) await attendance.destroy();
+
+    res.json({
+      message: "Successfully deleted attendance from event",
+    });
   })
 );
 
