@@ -383,7 +383,6 @@ router.delete(
     const groupId = req.params.groupId;
     const memberId = req.params.memberId;
     const group = await Group.findByPk(groupId);
-    debugger;
 
     // check that group exists
     if (!group) {
