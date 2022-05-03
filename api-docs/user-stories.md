@@ -65,7 +65,7 @@
 
 - As a user who is a member of the group, I want to be able to use a "Leave group" button to leave the group.
     - When I'm on `/groups/:groupId`:
-        I can click a button that removes my membership from the group.
+        - I can click a button that removes my membership from the group.
 
 - As a user, I want to be able to see the past and upcoming events for a group.
     - When I'm on `/groups/:groupId/events`:
@@ -145,7 +145,7 @@
     - When I am on `/groups/:groupId/events/:eventId`:
         - I can see all users who are both attending and requesting attendance
         - I can approve or deny people who have requested to join
-        - I can change someone's status to waitlisted or
+        - I can change someone's status to waitlisted or attending
 
 ## Deleting an event
 
