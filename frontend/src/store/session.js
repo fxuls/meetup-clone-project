@@ -61,9 +61,11 @@ export const signup = (user) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  // TODO: expire token?
+  const res = await csrfFetch("/api/session", {
+    method: "DELETE",
+  });
   dispatch(removeUser());
-  return;
+  return res;
 };
 
 export default function sessionReducer(state = { user: null }, action) {
