@@ -51,13 +51,17 @@ router.delete("/", (_req, res) => {
 });
 
 // get current user
-router.get("/", restoreUser, (req, res) => {
+router.get("/", restoreUser, asyncHandler(async (req, res) => {
   const { user } = req;
   if (user) {
+    const userObj = await User.findByPk(user.id);
     return res.json({
-      user: user.toSafeObject(),
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
     });
   } else return res.json({});
-});
+}));
 
 module.exports = router;
