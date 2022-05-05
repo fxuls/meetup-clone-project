@@ -6,6 +6,7 @@ import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+import PageNotFoundPage from "./components/PageNotFoundPage";
 
 import "normalize.css";
 
@@ -23,7 +24,9 @@ function App() {
       <h1>Hello from App</h1>
       <Navigation />
       <Switch>
-        <Route exact path="/">Home</Route>
+        <Route exact path="/">
+          Home
+        </Route>
 
         <Route path="/login">
           <LoginFormPage />
@@ -31,6 +34,10 @@ function App() {
 
         <Route path="/signup">
           <SignupFormPage />
+        </Route>
+
+        <Route>
+          <PageNotFoundPage />
         </Route>
       </Switch>
     </>
