@@ -6,6 +6,8 @@ import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 
+import "normalize.css";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
