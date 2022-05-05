@@ -1,9 +1,3 @@
-function PageNotFoundPage () {
-    return (
-        <>
-            <h1>Page not found</h1>
-        </>
-    )
-}
+import PageNotFoundPage from "./PageNotFoundPage";
 
 export default PageNotFoundPage;
