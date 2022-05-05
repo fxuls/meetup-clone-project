@@ -13,9 +13,7 @@ function LoginFormPage() {
   const [loginFailed, setLoginFailed] = useState(false);
 
   // if user is logged in redirect to home
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
+  if (sessionUser) return <Redirect to="/" />;
 
   // form submit
   const handleSubmit = (e) => {
