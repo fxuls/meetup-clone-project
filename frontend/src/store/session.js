@@ -38,8 +38,8 @@ export const login = (user) => async (dispatch) => {
 // restore user thunk
 export const restoreUser = () => async (dispatch) => {
   const res = await csrfFetch("/api/session");
-  const data = await res.json();
-  dispatch(setUser(data.user));
+  const user = await res.json();
+  dispatch(setUser(user));
   return res;
 };
 
