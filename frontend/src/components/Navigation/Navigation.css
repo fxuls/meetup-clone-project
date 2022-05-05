@@ -3,6 +3,14 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 2em;
+
+    height: 3.5em;
     width: auto;
+
+    background-color: var(--main-color);
+    padding: 10px;
+}
+
+a:hover {
+    color: white;
 }
