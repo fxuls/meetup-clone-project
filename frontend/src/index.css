@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-* {
+html {
+    --main-color: hsl(200, 39%, 59%);
+    --main-text-color: black;
+    --constrating-text-color: white;
+
     font-family: 'Poppins', sans-serif;
+    color: var(--main-text-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
 }
