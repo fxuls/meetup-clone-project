@@ -3,6 +3,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { restoreUser } from "./store/session";
+import Navigation from "./components/Navigation";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <h1>Hello from App</h1>
+      <Navigation />
       <Switch>
         <Route exact path="/">Home</Route>
 
