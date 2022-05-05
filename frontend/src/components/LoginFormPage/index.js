@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 function LoginFormPage() {
   const dispatch = useDispatch();
 
-  const sessionUser = useSelector(userSelector)
+  const sessionUser = useSelector(userSelector);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,18 +20,25 @@ function LoginFormPage() {
     e.preventDefault();
     setLoginFailed(false);
 
-    return dispatch(login({
-        email, password
-    })).catch(async (res) => {
-        if (res.status == "401") {
-            setLoginFailed(true);
-        }
+    return dispatch(
+      login({
+        email,
+        password,
+      })
+    ).catch(async (res) => {
+      if (res.status == "401") {
+        setLoginFailed(true);
+      }
     });
   };
 
   return (
     <>
-        {loginFailed ? <>Your email or password was entered incorrectly</> : null}
+      {loginFailed ? (
+        <div className="validation-errors">
+          Your email or password was entered incorrectly
+        </div>
+      ) : null}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
