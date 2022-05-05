@@ -1,9 +1,10 @@
 import { Switch, Route } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+
 import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation";
+import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 
 import "normalize.css";
