@@ -1,12 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userSelector, logout } from "../../store/session";
+
+import "./Navigation.css";
 
 
 // TODO: split authenticated/unauthenticated parts to their own components
 
 function Navigation () {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const sessionUser = useSelector(userSelector);
 
@@ -14,8 +18,15 @@ function Navigation () {
         dispatch(logout())
     }
 
+    const mastheadClick = () => {
+        history.push("/")
+    }
+
     return (
         <nav>
+            <div className="masthead" onClick={mastheadClick}>
+                MEETUP CLONE
+            </div>
             <NavLink to="/groups">Groups</NavLink>
             <NavLink to="/events">Events</NavLink>
             {!sessionUser ? <NavLink to="/login">Log in</NavLink> : null}
