@@ -3,7 +3,7 @@
 html {
     --main-color: hsl(200, 39%, 59%);
     --main-text-color: black;
-    --constrating-text-color: white;
+    --contrasting-text-color: white;
     --header-background-color: hsl(208, 100%, 97%);
 
     font-family: 'Poppins', sans-serif;
