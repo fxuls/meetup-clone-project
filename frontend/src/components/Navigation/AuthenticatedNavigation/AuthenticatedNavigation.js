@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../store/session";
 
+import "./AuthenticatedNavigation.css";
+
 function AuthenticatedNavigation() {
   const dispatch = useDispatch();
 
@@ -12,7 +14,9 @@ function AuthenticatedNavigation() {
   return (
     <>
       <NavLink to="/profile">Profile</NavLink>
-      <button onClick={logoutButtonClick}>Log out</button>
+      <button id="logout-button" onClick={logoutButtonClick}>
+        Log out
+      </button>
     </>
   );
 }
