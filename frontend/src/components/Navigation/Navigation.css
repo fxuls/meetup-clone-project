@@ -7,10 +7,14 @@ nav {
     height: 3.5em;
     width: auto;
 
-    background-color: var(--main-color);
+    background-color: var(--header-background-color);
     padding: 10px;
 }
 
 a:hover {
-    color: white;
+    color: var(--main-color);
+}
+
+#nav-links > * {
+    padding: 10px;
 }
