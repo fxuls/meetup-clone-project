@@ -22,23 +22,25 @@ function App() {
   return (
     <>
       <Navigation />
-      <Switch>
-        <Route exact path="/">
-          Home
-        </Route>
+      <main>
+        <Switch>
+          <Route exact path="/">
+            Home
+          </Route>
 
-        <Route path="/login">
-          <LoginFormPage />
-        </Route>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
 
-        <Route path="/signup">
-          <SignupFormPage />
-        </Route>
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
 
-        <Route>
-          <PageNotFoundPage />
-        </Route>
-      </Switch>
+          <Route>
+            <PageNotFoundPage />
+          </Route>
+        </Switch>
+      </main>
     </>
   );
 }
