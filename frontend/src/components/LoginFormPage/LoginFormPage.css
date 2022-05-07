@@ -1,0 +1,13 @@
+#form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#login-form {
+    height: 40em;
+    padding: 0.15em;
+    border: 0.15em solid var(--main-grey-opaque);
+    border-radius: 0.4em;
+}

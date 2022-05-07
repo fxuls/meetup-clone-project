@@ -3,6 +3,8 @@ import { login, userSelector } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import "./LoginFormPage.css";
+
 function LoginFormPage() {
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ function LoginFormPage() {
   };
 
   return (
-    <div className="form-container">
+    <div id="form-container">
       <form id="login-form" onSubmit={handleSubmit}>
         {loginFailed ? (
           <div className="validation-errors">
