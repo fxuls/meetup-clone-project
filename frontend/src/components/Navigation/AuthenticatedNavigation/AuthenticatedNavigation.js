@@ -4,6 +4,8 @@ import { logout } from "../../../store/session";
 
 import "./AuthenticatedNavigation.css";
 
+// TODO make buttons not wrap on screen shrink
+
 function AuthenticatedNavigation() {
   const dispatch = useDispatch();
 
