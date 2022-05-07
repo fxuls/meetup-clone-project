@@ -1,30 +1,43 @@
-#form-page {
+.form-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-#form-container {
+.form-container {
     width: 28em;
-    padding: 0.3em;
+    padding: 0.6em;
 
     border: 0.15em solid var(--main-grey-opaque);
     border-radius: 0.4em;
 }
 
+.form-container > p, .form-container > h1 {
+    margin: 0.3em;
+}
+
+
 #login-form {
     display: flex;
-    height: 20em;
+    height: 16em;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    gap: 2em
 }
 
-.row {
+#login-form .form-fields {
+    display: flex;
+    flex-direction: column;
+    height: 8em;
+    justify-content: space-between;
+}
+
+#login-form .form-fields .field-row {
     display: flex;
     flex-direction: column;
 }
 
-.row > label {
+#login-form .form-fields .field-row > label {
     font-weight:700;
 }

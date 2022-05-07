@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login, userSelector } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import "./LoginFormPage.css";
 
@@ -35,41 +35,46 @@ function LoginFormPage() {
   };
 
   return (
-    <div id="form-page">
-      <div id="form-container">
+    <div className="form-page">
+      <div className="form-container">
         <h1>Log in</h1>
+        <p>Not a member yet? <Link className="link" to="/signup">Sign up</Link></p>
         <form id="login-form" onSubmit={handleSubmit}>
-          {loginFailed ? (
-            <div className="validation-errors">
-              Your email or password was entered incorrectly
+          <div className="form-fields">
+            {loginFailed ? (
+              <div className="form-errors">
+                Your email or password was entered incorrectly
+              </div>
+            ) : null}
+
+            <div className="field-row">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
-          ) : null}
 
-          <div className="row">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <div className="field-row">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
-          <div className="row">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button className="button" type="submit">Log in</button>
+          <button className="form-button" type="submit">
+            Log in
+          </button>
         </form>
       </div>
     </div>
