@@ -14,7 +14,11 @@
 }
 
 .form-container > p, .form-container > h1 {
-    margin: 0.3em;
+    margin: 0.3em 0;
+}
+
+.form-container .form-errors {
+    color: var(--error-color);
 }
 
 
