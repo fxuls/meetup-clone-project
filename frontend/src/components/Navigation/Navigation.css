@@ -7,7 +7,7 @@ nav {
     height: 3.5em;
     width: auto;
 
-    background-color: var(--header-background-color);
+    background-color: var(--banner-background-color);
     padding: 10px;
 }
 
