@@ -41,7 +41,7 @@ function SignupFormPage() {
   return (
     <>
         <div className="validation-errors">
-
+          {/* TODO: add validation errors */}
         </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="firstName">First name</label>
