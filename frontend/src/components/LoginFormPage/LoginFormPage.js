@@ -33,8 +33,8 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <form id="login-form" onSubmit={handleSubmit}>
         {loginFailed ? (
           <div className="validation-errors">
             Your email or password was entered incorrectly
@@ -62,7 +62,7 @@ function LoginFormPage() {
 
         <button type="submit">Log in</button>
       </form>
-    </>
+    </div>
   );
 }
 
