@@ -18,3 +18,7 @@ a:hover {
 #nav-links > * {
     margin: 0px 10px;
 }
+
+#masthead {
+    cursor: pointer;
+}
