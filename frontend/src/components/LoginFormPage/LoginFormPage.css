@@ -1,13 +1,30 @@
-#form-container {
+#form-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-#login-form {
-    height: 40em;
-    padding: 0.15em;
+#form-container {
+    width: 28em;
+    padding: 0.3em;
+
     border: 0.15em solid var(--main-grey-opaque);
     border-radius: 0.4em;
+}
+
+#login-form {
+    display: flex;
+    height: 20em;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+.row > label {
+    font-weight:700;
 }

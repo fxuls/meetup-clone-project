@@ -35,35 +35,43 @@ function LoginFormPage() {
   };
 
   return (
-    <div id="form-container">
-      <form id="login-form" onSubmit={handleSubmit}>
-        {loginFailed ? (
-          <div className="validation-errors">
-            Your email or password was entered incorrectly
+    <div id="form-page">
+      <div id="form-container">
+        <h1>Log in</h1>
+        <form id="login-form" onSubmit={handleSubmit}>
+          {loginFailed ? (
+            <div className="validation-errors">
+              Your email or password was entered incorrectly
+            </div>
+          ) : null}
+
+          <div className="row">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
-        ) : null}
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <div className="row">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit">Log in</button>
-      </form>
+          <button className="button" type="submit">Log in</button>
+        </form>
+      </div>
     </div>
   );
 }
