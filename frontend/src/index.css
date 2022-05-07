@@ -38,3 +38,13 @@ a {
 a:visited {
     color: inherit;
 }
+
+button {
+    background-color: var(--main-color);
+    color: var(--contrasting-text-color);
+    font-weight: bolder;
+    font-size: larger;
+    border: none;
+    border-radius: 0.9em;
+    padding: 0.8em;
+}
