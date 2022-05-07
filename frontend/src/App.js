@@ -21,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div id="page">
       <header>
         <Navigation />
       </header>
@@ -47,7 +47,7 @@ function App() {
       <footer>
         <Footer />
       </footer>
-    </>
+    </div>
   );
 }
 
