@@ -11,6 +11,11 @@ html {
     color: var(--main-text-color);
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 main{
     margin: 0px 20px;
 }
