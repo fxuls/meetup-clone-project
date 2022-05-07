@@ -23,6 +23,7 @@ function App() {
   return (
     <div id="page">
       <Navigation />
+
       <main>
         <Switch>
           <Route exact path="/">
@@ -42,6 +43,7 @@ function App() {
           </Route>
         </Switch>
       </main>
+      
       <Footer />
     </div>
   );
