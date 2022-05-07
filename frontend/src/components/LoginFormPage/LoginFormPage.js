@@ -34,12 +34,12 @@ function LoginFormPage() {
 
   return (
     <>
-      {loginFailed ? (
-        <div className="validation-errors">
-          Your email or password was entered incorrectly
-        </div>
-      ) : null}
       <form onSubmit={handleSubmit}>
+        {loginFailed ? (
+          <div className="validation-errors">
+            Your email or password was entered incorrectly
+          </div>
+        ) : null}
         <label htmlFor="email">Email</label>
         <input
           type="email"
