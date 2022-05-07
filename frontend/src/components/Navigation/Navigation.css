@@ -11,14 +11,28 @@ nav {
     padding: 10px;
 }
 
-a:hover {
+#masthead {
+    cursor: pointer;
+}
+
+#nav-links {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: var(--main-text-color);
+    text-decoration: none;
+}
+
+nav a:hover {
     color: var(--main-color);
 }
 
-#nav-links > * {
+#nav-links a, button {
     margin: 0px 10px;
 }
 
-#masthead {
-    cursor: pointer;
+.nav-item {
+    margin: 50px;
 }
