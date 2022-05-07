@@ -12,12 +12,12 @@ function AuthenticatedNavigation() {
   };
 
   return (
-    <>
+    <div id="auth-nav">
       <NavLink to="/profile">Profile</NavLink>
-      <button id="logout-button" onClick={logoutButtonClick}>
+      <button className="logout-button" onClick={logoutButtonClick}>
         Log out
       </button>
-    </>
+    </div>
   );
 }
 
