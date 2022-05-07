@@ -1,7 +1,9 @@
-function Footer () {
-    return (
-        <p>This will be the footer information</p>
-    );
+function Footer() {
+  return (
+    <footer>
+      <p>This will be the footer information</p>
+    </footer>
+  );
 }
 
 export default Footer;
