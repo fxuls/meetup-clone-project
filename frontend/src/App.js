@@ -9,8 +9,6 @@ import SignupFormPage from "./components/SignupFormPage";
 import PageNotFoundPage from "./components/PageNotFoundPage";
 import Footer from "./components/Footer";
 
-import "normalize.css";
-
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -43,7 +41,7 @@ function App() {
           </Route>
         </Switch>
       </main>
-      
+
       <Footer />
     </div>
   );
