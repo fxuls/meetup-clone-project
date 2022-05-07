@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import PageNotFoundPage from "./components/PageNotFoundPage";
+import Footer from "./components/Footer";
 
 import "normalize.css";
 
@@ -21,7 +22,9 @@ function App() {
 
   return (
     <>
-      <Navigation />
+      <header>
+        <Navigation />
+      </header>
       <main>
         <Switch>
           <Route exact path="/">
@@ -41,6 +44,9 @@ function App() {
           </Route>
         </Switch>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
