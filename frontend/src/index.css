@@ -26,11 +26,11 @@ nav {
 
 main {
   flex: 1 1 auto;
-  margin: 0px 20px;
+  margin: 0 1rem;
 }
 
 footer {
-  flex: 0 1 20px;
+  flex: 0 1 auto;
 }
 
 a {
