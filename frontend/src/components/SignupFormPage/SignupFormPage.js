@@ -39,6 +39,7 @@ function SignupFormPage() {
   return (
     <div className="form-page">
       <div className="form-container">
+        <h1 className="unselectable">Sign up</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="firstName">First name</label>
           <input
