@@ -1,0 +1,34 @@
+.form-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-container {
+    width: 26em;
+    padding: 0.6em;
+
+    border: 0.15em solid var(--main-grey-opaque);
+    border-radius: 0.4em;
+}
+
+.form-container .form-errors {
+    color: var(--error-color);
+}
+
+.form-container input {
+    border: 0.1em solid var(--main-grey-opaque);
+    border-radius: 0.8em;
+    padding: 0.4em;
+}
+
+.form-button {
+    background-color: var(--main-color);
+    color: var(--contrasting-text-color);
+    font-weight: bolder;
+    font-size: larger;
+    border: none;
+    border-radius: 0.8em;
+    padding: 0.8em;
+}
