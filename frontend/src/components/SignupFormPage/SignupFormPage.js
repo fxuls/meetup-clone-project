@@ -24,79 +24,76 @@ function SignupFormPage() {
     const validationErrors = [];
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        errors.push("All fields are required");
+      errors.push("All fields are required");
     }
 
     if (password !== confirmPassword) {
-        errors.push("Passwords must match");
+      errors.push("Passwords must match");
     }
 
     if (password && password.length < 6) {
       errors.push("Password must be at least 6 characters");
     }
-
-
   };
 
   return (
-    <>
-        <div className="validation-errors">
-          {/* TODO: add validation errors */}
-        </div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First name</label>
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
+    <div className="form-page">
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="firstName">First name</label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
 
-        <label htmlFor="lastName">Last name</label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
+          <label htmlFor="lastName">Last name</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
 
-        <label htmlFor="email">Email address</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <label htmlFor="email">Email address</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <label htmlFor="confirmPassword">Confirm password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+          <label htmlFor="confirmPassword">Confirm password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
 
-        <button type="submit">Sign up</button>
-      </form>
-    </>
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+    </div>
   );
 }
 
