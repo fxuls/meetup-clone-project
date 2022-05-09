@@ -6,7 +6,7 @@
 }
 
 .form-container {
-    width: 28em;
+    width: 26em;
     padding: 0.6em;
 
     border: 0.15em solid var(--main-grey-opaque);
@@ -17,10 +17,30 @@
     margin: 0.3em 0;
 }
 
+.form-container > h1 {
+    color: var(--main-color);
+    font-size: 2.7em;
+}
+
 .form-container .form-errors {
     color: var(--error-color);
 }
 
+.form-container input {
+    border: 0.1em solid var(--main-grey-opaque);
+    border-radius: 0.8em;
+    padding: 0.4em;
+}
+
+.form-button {
+    background-color: var(--main-color);
+    color: var(--contrasting-text-color);
+    font-weight: bolder;
+    font-size: larger;
+    border: none;
+    border-radius: 0.8em;
+    padding: 0.8em;
+}
 
 #login-form {
     display: flex;
@@ -40,6 +60,7 @@
 #login-form .form-fields .field-row {
     display: flex;
     flex-direction: column;
+    gap: 0.2em;
 }
 
 #login-form .form-fields .field-row > label {
