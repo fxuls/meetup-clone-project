@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,500;1,700&display=swap");
 
-html {
+:root {
   --main-color: hsl(200, 39%, 59%);
   --main-text-color: black;
   --contrasting-text-color: white;
