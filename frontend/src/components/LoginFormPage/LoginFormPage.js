@@ -37,7 +37,7 @@ function LoginFormPage() {
   return (
     <div className="form-page">
       <div className="form-container">
-        <h1>Log in</h1>
+        <h1 className="unselectable">Log in</h1>
         <p>Not a member yet? <Link className="link" to="/signup">Sign up</Link></p>
         <form id="login-form" onSubmit={handleSubmit}>
           <div className="form-fields">
