@@ -7,8 +7,8 @@
 
 .form-container {
     width: 26em;
+    height: auto;
     padding: 0.6em;
-
     border: 0.15em solid var(--main-grey-opaque);
     border-radius: 0.4em;
 }
@@ -31,4 +31,38 @@
     border: none;
     border-radius: 0.8em;
     padding: 0.8em;
+}
+
+.form-container > p, .form-container > h1 {
+    margin: 0.3em 0;
+}
+
+.form-container > h1 {
+    color: var(--main-color);
+    font-size: 2.7em;
+}
+
+form {
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.3em;
+}
+
+form .form-fields {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
+}
+
+form .form-fields .field-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+form .form-fields .field-row > label {
+    font-weight:700;
 }
