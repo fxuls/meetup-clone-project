@@ -13,8 +13,12 @@
     border-radius: 0.4em;
 }
 
-.form-container .form-errors {
+.form-errors {
     color: var(--error-color);
+}
+
+.form-errors p {
+    margin: 0em;
 }
 
 .form-container input {
