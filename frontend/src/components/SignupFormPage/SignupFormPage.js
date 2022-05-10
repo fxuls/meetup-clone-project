@@ -77,7 +77,7 @@ function SignupFormPage() {
               />
             </div>
 
-            <div className="field-row"></div>
+            <div className="field-row">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -99,6 +99,7 @@ function SignupFormPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
+            </div>
             </div>
           <button className="form-button" type="submit">
             Sign up
