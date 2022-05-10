@@ -41,57 +41,68 @@ function SignupFormPage() {
       <div className="form-container">
         <h1 className="unselectable">Sign up</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First name</label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
+          <div className="form-fields">
+            <div className="field-row">
+              <label htmlFor="firstName">First name</label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="field-row">
+              <label htmlFor="lastName">Last name</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </div>
 
-          <label htmlFor="lastName">Last name</label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
+            <div className="field-row">
+              <label htmlFor="email">Email address</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+            <div className="field-row"></div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            </div>
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <label htmlFor="confirmPassword">Confirm password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-
-          <button type="submit">Sign up</button>
+            <div className="field-row">
+            <label htmlFor="confirmPassword">Confirm password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            </div>
+          <button className="form-button" type="submit">
+            Sign up
+          </button>
         </form>
       </div>
     </div>
