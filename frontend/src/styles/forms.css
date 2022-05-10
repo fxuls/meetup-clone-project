@@ -45,6 +45,7 @@
 form {
     display: flex;
     height: fit-content;
+    margin-top: 1em;
     flex-direction: column;
     justify-content: space-evenly;
     gap: 1.3em;
