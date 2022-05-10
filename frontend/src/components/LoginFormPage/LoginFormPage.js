@@ -3,8 +3,6 @@ import { login, userSelector } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
-import "./LoginFormPage.css";
-
 function LoginFormPage() {
   const dispatch = useDispatch();
 
