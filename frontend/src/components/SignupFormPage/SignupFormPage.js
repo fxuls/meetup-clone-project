@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import { userSelector } from "../../store/session";
+import { signup } from "../../store/session";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function SignupFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const errors = [];
+    let errors = [];
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       errors.push("All fields are required");
@@ -35,8 +36,23 @@ function SignupFormPage() {
       errors.push("Password must be at least 6 characters");
     }
 
+    // debugger;
+
     if (errors.length === 0) {
-      alert("trying to log in now");
+      return dispatch(
+        signup({
+          firstName,
+          lastName,
+          email,
+          password,
+        })
+      ).catch(async (res) => {
+        if (res.status !== 200) {
+          const resData = await res.json();
+          errors = resData.errors ? Object.values(resData.errors) : ["A problem occurred with your request"];
+          setValidationErrors(errors)
+        }
+      });
     }
 
     setValidationErrors(errors);
@@ -46,12 +62,21 @@ function SignupFormPage() {
     <div className="form-page">
       <div className="form-container">
         <h1 className="unselectable">Sign up</h1>
-        <p>Already a member? <Link className="link" to="/login">Log in</Link></p>
+        <p>
+          Already a member?{" "}
+          <Link className="link" to="/login">
+            Log in
+          </Link>
+        </p>
         <form onSubmit={handleSubmit}>
           <div className="form-fields">
-            {validationErrors.length ? <ul className="form-errors">
-              {validationErrors.map((error) => <li>{error}</li>)}
-            </ul> : null}
+            {validationErrors.length ? (
+              <div className="form-errors">
+                {validationErrors.map((error) => (
+                  <p>{error}</p>
+                ))}
+              </div>
+            ) : null}
             <div className="field-row">
               <label htmlFor="firstName">First name</label>
               <input
@@ -88,29 +113,29 @@ function SignupFormPage() {
             </div>
 
             <div className="field-row">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
 
             <div className="field-row">
-            <label htmlFor="confirmPassword">Confirm password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
+              <label htmlFor="confirmPassword">Confirm password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
             </div>
-            </div>
+          </div>
           <button className="form-button" type="submit">
             Sign up
           </button>
