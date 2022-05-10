@@ -13,7 +13,7 @@ function SignupFormPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [validationErrors, setValidationErrors] = useState([]);
 
   // if user is logged in redirect to home
   if (sessionUser) return <Redirect to="/" />;
@@ -21,7 +21,7 @@ function SignupFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const validationErrors = [];
+    const errors = [];
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       errors.push("All fields are required");
@@ -34,6 +34,12 @@ function SignupFormPage() {
     if (password && password.length < 6) {
       errors.push("Password must be at least 6 characters");
     }
+
+    if (errors.length === 0) {
+      alert("trying to log in now");
+    }
+
+    setValidationErrors(errors);
   };
 
   return (
@@ -43,6 +49,9 @@ function SignupFormPage() {
         <p>Already a member? <Link className="link" to="/login">Log in</Link></p>
         <form onSubmit={handleSubmit}>
           <div className="form-fields">
+            {validationErrors.length ? <ul className="form-errors">
+              {validationErrors.map((error) => <li>{error}</li>)}
+            </ul> : null}
             <div className="field-row">
               <label htmlFor="firstName">First name</label>
               <input
