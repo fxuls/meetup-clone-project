@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { userSelector } from "../../store/session";
 
 function SignupFormPage() {
@@ -40,6 +40,7 @@ function SignupFormPage() {
     <div className="form-page">
       <div className="form-container">
         <h1 className="unselectable">Sign up</h1>
+        <p>Already a member? <Link className="link" to="/login">Log in</Link></p>
         <form onSubmit={handleSubmit}>
           <div className="form-fields">
             <div className="field-row">
