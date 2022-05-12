@@ -12,13 +12,12 @@
 
   font-family: "Poppins", sans-serif;
   color: var(--main-text-color);
-  height: 100vh;
-
 }
 
 #page {
   display: flex;
   flex-flow: column;
+  height: 100vh;
 }
 
 nav {
