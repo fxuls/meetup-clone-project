@@ -18,7 +18,7 @@ export const fetchGroups = () => async (dispatch) => {
     return res;
 }
 
-export default function sessionReducer(state = { groups: {}}, action) {
+export default function groupsReducer(state = { groups: {}}, action) {
     switch (action.type) {
         case SET_GROUPS:
             const newGroups = {};
