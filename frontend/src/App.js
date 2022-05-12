@@ -8,6 +8,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import PageNotFoundPage from "./components/PageNotFoundPage";
 import Footer from "./components/Footer";
+import HomePage from "./components/HomePage/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
       <main>
         <Switch>
           <Route exact path="/">
-            Home
+            <HomePage />
           </Route>
 
           <Route path="/login">
