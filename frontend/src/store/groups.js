@@ -44,7 +44,6 @@ export default function groupsReducer(state = {}, action) {
 
   switch (action.type) {
     case SET_GROUPS:
-      action.groups.forEach((group) => (newGroups[group.id] = group));
       return action.groups.reduce((newObj, group) => {
         newObj[group.id] = group;
         return newObj;
