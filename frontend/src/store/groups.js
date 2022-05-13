@@ -9,49 +9,49 @@ export const groupSelector = (groupId) => (state) => state.groups[groupId];
 
 // SET_GROUPS action creator
 export function setGroups(groups) {
-    return {
-        type: SET_GROUPS,
-        groups,
-    }
+  return {
+    type: SET_GROUPS,
+    groups,
+  };
 }
 
 // SET_GROUP action creator
 export function setGroup(group) {
-    return {
-        type: SET_GROUP,
-        group,
-    }
+  return {
+    type: SET_GROUP,
+    group,
+  };
 }
 
 // fetch all groups thunk
 export const fetchGroups = () => async (dispatch) => {
-    const res = await csrfFetch("/api/groups");
-    const data = await res.json();
-    dispatch(setGroups(data.Groups))
-    return res;
-}
+  const res = await csrfFetch("/api/groups");
+  const data = await res.json();
+  dispatch(setGroups(data.Groups));
+  return res;
+};
 
 // fetch group thunk
 export const fetchGroup = (groupId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/groups/${groupId}`);
-    const data = await res.json();
-    dispatch(setGroup(data));
-    return res;
-}
+  const res = await csrfFetch(`/api/groups/${groupId}`);
+  const data = await res.json();
+  dispatch(setGroup(data));
+  return res;
+};
 
 export default function groupsReducer(state = {}, action) {
-    const newGroups = { ...state };
+  const newGroups = { ...state };
 
-    switch (action.type) {
-        case SET_GROUPS:
-            action.groups.forEach(group => newGroups[group.id] = group);
-            return action.groups.reduce((newObj, group) => {
-                newObj[group.id] = group;
-                return newObj;
-            }, {});
-        case SET_GROUP:
-            newGroups[action.group.id] = action.group;
-        default:
-            return newGroups;
-    }
+  switch (action.type) {
+    case SET_GROUPS:
+      action.groups.forEach((group) => (newGroups[group.id] = group));
+      return action.groups.reduce((newObj, group) => {
+        newObj[group.id] = group;
+        return newObj;
+      }, {});
+    case SET_GROUP:
+      newGroups[action.group.id] = action.group;
+    default:
+      return newGroups;
+  }
 }
