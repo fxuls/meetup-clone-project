@@ -2,6 +2,10 @@ import { csrfFetch } from "./csrf";
 
 export const SET_GROUPS = "groups/SET_GROUPS";
 
+export const allGroupsSelector = (state) => state.groups;
+
+export const groupSelector = (groupId) => (state) => state.groups[groupId];
+
 // SET_GROUPS action creator
 export function setGroups(groups) {
     return {
