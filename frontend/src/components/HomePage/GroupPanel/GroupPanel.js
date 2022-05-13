@@ -1,5 +1,5 @@
 function GroupPanel () {
-    return null;
+    return <p>Group panel</p>;
 }
 
 export default GroupPanel;
