@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchGroups } from "../../store/groups";
 import { fetchEvents } from "../../store/events";
+import GroupsPanel from "./GroupsPanel/GroupsPanel";
+import EventsPanel from "./EventsPanel/EventsPanel";
 
 import "./HomePage.css";
 
@@ -27,8 +29,8 @@ function HomePage() {
           <button onClick={() => setCurrentPage(EVENTS)}>Events</button>
         </div>
         <div className="home-content-container">
-            {currentPage === GROUPS ? <p>Groups will be here</p> : null}
-            {currentPage === EVENTS ? <p>Events will be here</p> : null}
+            {currentPage === GROUPS ? <GroupsPanel /> : null}
+            {currentPage === EVENTS ? <EventsPanel /> : null}
           </div>
       </div>
     </div>
