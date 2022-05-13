@@ -25,10 +25,11 @@ function HomePage() {
         <div className="nav-bar">
           <button>Groups</button>
           <button>Events</button>
-          <div className="home-content-container">
-
-          </div>
         </div>
+        <div className="home-content-container">
+            {currentPage === GROUPS ? <p>Groups will be here</p> : null}
+            {currentPage === EVENTS ? <p>Events will be here</p> : null}
+          </div>
       </div>
     </div>
   );
