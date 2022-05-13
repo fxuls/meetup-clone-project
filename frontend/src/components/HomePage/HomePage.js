@@ -23,8 +23,8 @@ function HomePage() {
     <div className="home-page">
       <div className="home-container">
         <div className="nav-bar">
-          <button>Groups</button>
-          <button>Events</button>
+          <button onClick={() => setCurrentPage(GROUPS)}>Groups</button>
+          <button onClick={() => setCurrentPage(EVENTS)}>Events</button>
         </div>
         <div className="home-content-container">
             {currentPage === GROUPS ? <p>Groups will be here</p> : null}
