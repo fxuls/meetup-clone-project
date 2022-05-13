@@ -27,3 +27,18 @@
     font-size: 1.5em;
     padding: 0;
 }
+
+.panel-list {
+    list-style: none;
+    padding: 0;
+}
+
+.card-container {
+    padding: 0.6em 0;
+    border-bottom: 1px solid var(--main-grey);
+}
+
+.preview-image {
+    max-height: 200px;
+    max-width: 200px;
+}
