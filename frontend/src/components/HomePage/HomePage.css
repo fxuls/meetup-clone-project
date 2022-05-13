@@ -8,14 +8,16 @@
 .home-container {
     width: 800px;
     height: 100vh;
-    background-color: blueviolet;
+    background-color: rgb(197, 155, 236);
+    padding: 0 0.5em;
 }
 
 .home-container .nav-bar {
     display: flex;
     flex-direction: row;
-    padding: 2em;
+    padding: 0.4em 0 0.7em 0;
     background-color: white;
+    gap: 1em;
 }
 
 .nav-bar button {
@@ -23,4 +25,5 @@
     background-color: inherit;
     color: var(--main-grey);
     font-size: 1.5em;
+    padding: 0;
 }
