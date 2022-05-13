@@ -5,8 +5,14 @@ import { fetchEvents } from "../../store/events";
 
 import "./HomePage.css";
 
+const GROUPS = "homepage/GROUPS";
+const EVENTS = "homepage/EVENTS";
+
 function HomePage() {
   const dispatch = useDispatch();
+
+  // open the groups tab by default
+  const [currentPage, setCurrentPage] = useState(GROUPS);
 
   useEffect(() => {
     dispatch(fetchGroups());
@@ -19,6 +25,9 @@ function HomePage() {
         <div className="nav-bar">
           <button>Groups</button>
           <button>Events</button>
+          <div className="home-content-container">
+
+          </div>
         </div>
       </div>
     </div>
