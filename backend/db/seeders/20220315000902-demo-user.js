@@ -16,13 +16,31 @@ module.exports = {
           firstName: "Mary",
           lastName: "Steele",
           email: "msteele@gmail.com",
-          passwordHash: bcrypt.hashSync("asdfwow"),
+          passwordHash: bcrypt.hashSync("password"),
         },
         {
           firstName: "Ethan",
           lastName: "Moore",
           email: "emoore@gmail.com",
-          passwordHash: bcrypt.hashSync("paswurd"),
+          passwordHash: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "Doug",
+          lastName: "Mannor",
+          email: "dmannor@gmail.com",
+          passwordHash: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "Abby",
+          lastName: "Oberdick",
+          email: "aoberdick@gmail.com",
+          passwordHash: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "Tony",
+          lastName: "Grillo",
+          email: "tgrillo@gmail.com",
+          passwordHash: bcrypt.hashSync("password"),
         },
       ],
       {}
