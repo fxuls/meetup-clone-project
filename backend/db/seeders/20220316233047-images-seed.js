@@ -13,6 +13,7 @@ module.exports = {
       { url: "/images/event2_1.png" },
       { url: "/images/event2_2.png" },
       { url: "/images/event3_1.png" },
+      { url: "/images/event4_1.png" },
     ]);
   },
 

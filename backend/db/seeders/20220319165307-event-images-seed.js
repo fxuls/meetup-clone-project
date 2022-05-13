@@ -10,6 +10,7 @@ module.exports = {
         { eventId: 2, imageId: 8 },
         { eventId: 2, imageId: 9 },
         { eventId: 3, imageId: 10 },
+        { eventId: 4, imageId: 11 },
       ],
       {}
     );

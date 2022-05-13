@@ -6,10 +6,16 @@ module.exports = {
       "Members",
       [
         { userId: 1, groupId: 1 },
-        { userId: 1, groupId: 2 },
-        { userId: 1, groupId: 3 },
-        { userId: 2, groupId: 3 },
-        { userId: 3, groupId: 2 },
+        { userId: 2, groupId: 1 },
+        { userId: 2, groupId: 2 },
+        { userId: 3, groupId: 1 },
+        { userId: 3, groupId: 3 },
+        { userId: 4, groupId: 1 },
+        { userId: 4, groupId: 2 },
+        { userId: 4, groupId: 3 },
+        { userId: 5, groupId: 1 },
+        { userId: 6, groupId: 2 },
+        { userId: 6, groupId: 3 },
       ],
       {}
     );
