@@ -9,7 +9,7 @@ function GroupCard({ group }) {
   return (
     <div
       className="card group-card"
-      onClick={() => history.pushState(`/groups/${id}`)}
+      onClick={() => history.push(`/groups/${id}`)}
     >
       <div className="preview-image-container">
         <img className="preview-image" src={previewImage} />
