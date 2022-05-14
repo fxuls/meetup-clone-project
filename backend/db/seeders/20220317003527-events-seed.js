@@ -14,6 +14,7 @@ module.exports = {
        startDate: "2022-05-13T23:00:00.000Z",
        endDate: "2022-05-13T03:00:00.000Z",
        previewImageId: 6,
+       numAttending: 3,
      },
      {
       groupId: 1,
@@ -22,6 +23,7 @@ module.exports = {
       type: "virtual",
       startDate: "2022-05-15T23:00:00.000Z",
       previewImageId: 8,
+      numAttending: 1,
      },
      {
       groupId: 2,
@@ -32,6 +34,7 @@ module.exports = {
       startDate: "2022-05-13T13:00:00.000Z",
       endDate: "2022-05-13T16:00:00.000Z",
       previewImageId: 10,
+      numAttending: 2,
      },
      {
       groupId: 3,
@@ -42,6 +45,7 @@ module.exports = {
       startDate: "2022-05-13T11:30:00.000Z",
       endDate: "2022-05-13T13:30:00.000Z",
       previewImageId: 11,
+      numAttending: 3,
      },
      {
       groupId: 3,
@@ -50,6 +54,7 @@ module.exports = {
       type: "virtual",
       startDate: "2022-05-16T21:00:00.000Z",
       endDate: "2022-05-16T22:15:00.000Z",
+      numAttending: 1,
      },
    ], {})
   },
