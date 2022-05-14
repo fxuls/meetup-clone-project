@@ -87,22 +87,22 @@
     margin: 0.5em 0;
 }
 
-.card-info > p.date-line {
-    text-transform: uppercase;
-    color: var(--main-color);
-}
-
 .card-info > p.name {
     font-size: large;
     font-weight: bold;
     letter-spacing: 0.05em;
 }
 
-.card-info > p.group-info {
+.event-card p.date-line {
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+
+.event-card p.group-info {
     margin-bottom: 1.2em;
 }
 
-.card-info > p.attending-count {
+.event-card p.attending-count {
     text-align: right;
     color: var(--light-grey);
 }
