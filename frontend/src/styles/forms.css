@@ -9,8 +9,8 @@
     width: 26em;
     height: auto;
     padding: 0.6em;
-    border: 0.15em solid var(--main-grey-opaque);
-    border-radius: 0.4em;
+    border-radius: var(--border-radius);
+    box-shadow: var(--heavy-box-shadow);
 }
 
 .form-errors {
@@ -23,7 +23,7 @@
 
 .form-container input {
     border: 0.1em solid var(--main-grey-opaque);
-    border-radius: 0.8em;
+    border-radius: var(--border-radius);
     padding: 0.4em;
 }
 
