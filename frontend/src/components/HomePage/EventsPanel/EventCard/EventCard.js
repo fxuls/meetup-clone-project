@@ -32,7 +32,7 @@ function EventCard({ event }) {
         <p className="date-line">{startDateString}</p>
         <p className="name">{event.name}</p>
         <p className="group-info">{groupInfo}</p>
-        <p className="attending-count">{attendingInfo}</p>
+        <p className="attending-count sub-text">{attendingInfo}</p>
       </div>
     </div>
   );
