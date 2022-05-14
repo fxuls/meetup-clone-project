@@ -23,15 +23,23 @@ function HomePage() {
 
   return (
     <div className="home-page">
-      <div className="home-container">
-        <div className="nav-bar">
-          <button active={(currentPage === GROUPS) + ""} onClick={() => setCurrentPage(GROUPS)}>Groups</button>
-          <button active={(currentPage === EVENTS) + ""} onClick={() => setCurrentPage(EVENTS)}>Events</button>
-        </div>
-        <div className="home-content-container">
-            {currentPage === GROUPS ? <GroupsPanel /> : null}
-            {currentPage === EVENTS ? <EventsPanel /> : null}
-          </div>
+      <div className="nav-bar">
+        <button
+          active={(currentPage === GROUPS) + ""}
+          onClick={() => setCurrentPage(GROUPS)}
+        >
+          Groups
+        </button>
+        <button
+          active={(currentPage === EVENTS) + ""}
+          onClick={() => setCurrentPage(EVENTS)}
+        >
+          Events
+        </button>
+      </div>
+      <div className="home-content-container">
+        {currentPage === GROUPS ? <GroupsPanel /> : null}
+        {currentPage === EVENTS ? <EventsPanel /> : null}
       </div>
     </div>
   );
