@@ -50,7 +50,8 @@ export default function groupsReducer(state = {}, action) {
       }, {});
     case SET_GROUP:
       newGroups[action.group.id] = action.group;
-    default:
-      return newGroups;
+      break;
   }
+
+  return newGroups;
 }
