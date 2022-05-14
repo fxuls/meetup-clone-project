@@ -3,7 +3,9 @@ function EventCard({ event }) {
 
   return (
     <div className="card">
-      <img className="preview-image" src={previewImage} />
+      <div className="preview-image-container">
+        <img className="preview-image" src={previewImage} />
+      </div>
       <p>{event.name}</p>
     </div>
   );
