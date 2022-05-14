@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userSelector, logout } from "../../store/session";
+import { userSelector} from "../../store/session";
 import AuthenticatedNavigation from "./AuthenticatedNavigation";
 import UnauthenticatedNavigation from "./UnauthenticatedNavigation";
 
