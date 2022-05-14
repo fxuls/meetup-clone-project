@@ -50,7 +50,8 @@ export default function eventsReducer(state = {}, action) {
             }, {});
         case SET_EVENT:
             newEvents[action.event.id] = action.event;
-        default:
-            return newEvents;
+            break;
     }
+
+    return newEvents;
 }
