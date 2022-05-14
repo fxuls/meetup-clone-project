@@ -9,6 +9,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import PageNotFoundPage from "./components/PageNotFoundPage";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
+import GroupInfoPage from "./components/GroupInfoPage/GroupInfoPage";
+import EventInfoPage from "./components/EventInfoPage/EventInfoPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +37,14 @@ function App() {
 
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+
+          <Route path="/groups/:groupId/events/:eventId">
+            <EventInfoPage />
+          </Route>
+
+          <Route path="/groups/:groupId">
+            <GroupInfoPage />
           </Route>
 
           <Route>
