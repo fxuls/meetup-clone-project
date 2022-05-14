@@ -4,7 +4,6 @@ nav {
     justify-content: space-between;
     align-items: center;
 
-    height: 3.5em;
     width: auto;
 
     background-color: var(--banner-background-color);
