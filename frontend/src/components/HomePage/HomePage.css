@@ -118,7 +118,7 @@
     margin-top: 0.2em;
 }
 
-.group-card p.sub-text {
+p.sub-text {
     line-height: 1.3em;
     font-size: smaller;
     color: var(--light-grey);
