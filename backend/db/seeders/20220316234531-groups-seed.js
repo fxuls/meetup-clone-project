@@ -12,6 +12,7 @@ module.exports = {
         previewImageId: 1,
         city: "San Francisco",
         state: "California",
+        numMembers: 5,
       },
       {
         organizerId: 2,
@@ -22,6 +23,7 @@ module.exports = {
         previewImageId: 3,
         city: "Miami",
         state: "Florida",
+        numMembers: 3,
       },
       {
         organizerId: 3,
@@ -32,6 +34,7 @@ module.exports = {
         previewImageId: 5,
         city: "Pittsburgh",
         state: "Pennsylvania",
+        numMembers: 3,
       },
     ]);
   },
