@@ -328,6 +328,7 @@ Returns the details of a group specified by its id.
       "updatedAt": "2021-11-19 20:39:36",
       "numMembers": 10,
       "images": ["image url"],
+      "previewImage": "/images/my_image.png",
       "Organizer": {
         "id": 1,
         "firstName": "John",
