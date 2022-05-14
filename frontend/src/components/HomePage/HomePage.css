@@ -5,6 +5,7 @@
     margin: 2em 16%;
     min-height: 20em;
     min-width: 33em;
+    max-width: 49em;
 }
 
 .nav-bar {
