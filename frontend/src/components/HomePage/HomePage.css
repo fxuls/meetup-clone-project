@@ -6,10 +6,11 @@
 }
 
 .home-container {
-    width: 800px;
-    height: 100vh;
-    background-color: rgb(197, 155, 236);
+    width: 700px;
+    min-height: 20em;
     padding: 0 0.5em;
+    border: 0.15em solid var(--main-grey-opaque);
+    border-radius: 0.4em;
 }
 
 .home-container .nav-bar {
@@ -43,4 +44,5 @@
 .preview-image {
     max-height: 200px;
     max-width: 200px;
+    border-radius: 0.8em;
 }
