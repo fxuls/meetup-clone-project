@@ -1,3 +1,28 @@
 footer {
-    background-color: var(--banner-background-color);
+    background-color: var(--main-grey);
+    color: white;
+}
+
+.footer-container {
+    margin: 1.4em 12%;
+}
+
+footer .create-group span {
+    font-weight: bold;
+    font-size: large;
+    margin-right: 1em;
+}
+
+footer .create-group button {
+    color: var(--contrasting-text-color);
+    background-color: transparent;
+    font-weight: bold;
+    font-size: large;
+    border: 0.2em solid var(--contrasting-text-color);
+    border-radius: 0.3em;
+    padding: 0.6em;
+}
+
+footer .create-group button:hover {
+    cursor: pointer;
 }
