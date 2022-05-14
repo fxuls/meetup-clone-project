@@ -22,7 +22,7 @@ function EventCard({ event }) {
 
   return (
     <div
-      className="card"
+      className="card event-card"
       onClick={() => history.push(`/groups/${groupId}/events/${id}`)}
     >
       <div className="preview-image-container">
