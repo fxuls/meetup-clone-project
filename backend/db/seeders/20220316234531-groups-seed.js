@@ -21,7 +21,7 @@ module.exports = {
         private: false,
         previewImageId: 3,
         city: "Miami",
-        state: "Flordia",
+        state: "Florida",
       },
       {
         organizerId: 3,
