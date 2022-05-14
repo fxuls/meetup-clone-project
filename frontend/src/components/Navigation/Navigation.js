@@ -7,7 +7,7 @@ import UnauthenticatedNavigation from "./UnauthenticatedNavigation";
 
 import "./Navigation.css";
 
-// TODO: split authenticated/unauthenticated parts to their own components
+// TODO make a tags into non refreshing navlink tags
 
 function Navigation() {
   const dispatch = useDispatch();
