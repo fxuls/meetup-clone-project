@@ -5,8 +5,7 @@ function EventCard({ event }) {
   const { previewImage, Group, numAttending } = event;
 
   // convert startDate timestamp into text format
-  // example: Fri, May 13 ⸱ 9:30 pm EDT
-  // format string: ddd, MMM D ⸱ h:mm a
+  // example: Fri, May 13 ⸱ 9:30 pm
   const startDate = moment(event.startDate);
   const startDateString = startDate.format("ddd, MMM, D • h:mm a");
 
