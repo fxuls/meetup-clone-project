@@ -47,6 +47,7 @@
 
 .panel-list > li {
     margin-top: 1em;
+    max-width: 57em;
 }
 
 .card {
