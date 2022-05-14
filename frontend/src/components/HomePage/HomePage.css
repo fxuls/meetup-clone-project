@@ -37,6 +37,10 @@
     border-bottom: 0.2em solid transparent;
 }
 
+.nav-bar button:hover {
+    cursor: pointer;
+}
+
 .panel-list {
     list-style: none;
     padding: 0;
