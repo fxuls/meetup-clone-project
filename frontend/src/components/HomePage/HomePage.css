@@ -52,6 +52,7 @@
 
 .card {
     padding: 1.4em;
+    min-width: 33em;
     display: grid;
     grid-template-columns: 12em 5fr;
     justify-content: center;
@@ -105,4 +106,31 @@
 .event-card p.attending-count {
     text-align: right;
     color: var(--light-grey);
+}
+
+.group-card p.name {
+    margin-bottom: 0.2em;
+}
+
+.group-card p.location {
+    text-transform: uppercase;
+    color: var(--main-color);
+    margin-top: 0.2em;
+}
+
+.group-card p.sub-text {
+    line-height: 1.3em;
+    font-size: smaller;
+    color: var(--light-grey);
+}
+
+.group-card p.about {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 2.2em;
+    padding-bottom: 0.45em;
+}
+
+.group-card p.info {
+    margin: 2em 0 0 0;
 }
