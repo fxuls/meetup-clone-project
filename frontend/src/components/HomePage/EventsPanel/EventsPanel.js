@@ -6,7 +6,7 @@ function EventsPanel () {
     const events = Object.values(useSelector(allEventsSelector));
 
     return (<div className="panel">
-        <p>Suggested Events for you</p>
+        <p className="sub-header">Suggested Events for you</p>
         <ul className="panel-list">
             {events.map(event => <li key={event.id}><EventCard event={event} /></li>)}
         </ul>
