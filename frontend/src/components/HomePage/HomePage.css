@@ -41,6 +41,10 @@
     cursor: pointer;
 }
 
+.panel .sub-header {
+    margin: 0.3em 0;
+}
+
 .panel-list {
     list-style: none;
     padding: 0;
@@ -51,10 +55,12 @@
     border-bottom: 1px solid var(--main-grey);
     display: grid;
     grid-template-columns: 2fr 5fr;
-    grid-template-rows: 9.6em;
     justify-content: center;
     align-items:flex-start;
     gap: 0.8em;
+    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 0.8em;
 }
 
 .preview-image-container {
@@ -70,4 +76,28 @@
     min-width: 100%;
     min-height: 100%;
     object-fit: cover;
+}
+
+.card-info > p {
+    margin: 0.5em 0;
+}
+
+.card-info > p.date-line {
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+
+.card-info > p.name {
+    font-size: large;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.card-info > p.group-info {
+    margin-bottom: 1.2em;
+}
+
+.card-info > p.attending-count {
+    text-align: right;
+    color: var(--light-grey);
 }
