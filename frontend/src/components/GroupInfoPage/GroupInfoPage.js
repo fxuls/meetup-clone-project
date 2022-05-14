@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { fetchGroup, groupSelector } from "../../store/groups";
 import { stateToAbrev } from "../../utils/index";
 import Spinner from "../Spinner";
+import AboutBlock from "./AboutBlock";
+import EventsBlock from "./EventsBlock";
 
 import "./GroupInfoPage.css";
 
@@ -56,8 +58,12 @@ function GroupInfoPage(props) {
       </div>
       <div className="content">
         <Switch>
-          <Route exact path="/groups/:groupId/events">Events</Route>
-          <Route path="/groups/:groupId">About</Route>
+          <Route exact path="/groups/:groupId/events">
+            <EventsBlock />
+          </Route>
+          <Route path="/groups/:groupId">
+            <AboutBlock />
+          </Route>
         </Switch>
       </div>
     </div>
