@@ -7,10 +7,10 @@
   --main-color: hsl(200, 39%, 59%);
   --main-text-color: black;
   --contrasting-text-color: white;
-  --main-grey: hsl(129, 0%, 19%);
+  --main-grey: rgb(33, 33, 33);
   --light-grey: rgb(117, 117, 117);
   --light-grey-opaque: rgba(117, 117, 117, var(--opacity));
-  --main-grey-opaque: hsla(129, 0%, 19%, var(--opacity));
+  --main-grey-opaque: rgba(33, 33, 33, var(--opacity));
   --banner-background-color: hsl(208, 100%, 97%);
   --link-color: var(--main-color);
   --error-color: hsl(1, 79%, 48%);
