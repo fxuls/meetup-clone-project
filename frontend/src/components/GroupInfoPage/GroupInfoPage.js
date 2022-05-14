@@ -53,8 +53,8 @@ function GroupInfoPage(props) {
         </p>
       </div>
       <div className="nav-bar">
-        <Link to={`/groups/${groupId}/`}>About</Link>
-        <Link to={`/groups/${groupId}/events`}>Events</Link>
+        <Link active={!location.pathname.toLowerCase().endsWith("events") + ""} to={`/groups/${groupId}/`}>About</Link>
+        <Link active={location.pathname.toLowerCase().endsWith("events") + ""} to={`/groups/${groupId}/events`}>Events</Link>
       </div>
       <div className="content">
         <Switch>
