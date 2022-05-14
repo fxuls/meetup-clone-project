@@ -37,6 +37,7 @@ router.get(
       include: [
         { model: User, as: "Organizer" },
         { model: Image, as: "groupImages" },
+        { model: Image, as: "previewImage"}
       ],
     });
 
@@ -53,6 +54,9 @@ router.get(
 
     // convert Image models to urls
     group.groupImages = imagesToUrls(group.groupImages);
+
+    // convert preview image to url
+    group.previewImage = group.previewImage.url;
 
     res.json(group);
   })
