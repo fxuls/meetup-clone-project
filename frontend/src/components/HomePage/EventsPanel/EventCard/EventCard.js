@@ -1,8 +1,10 @@
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 import { stateToAbrev } from "../../../../utils";
 
 function EventCard({ event }) {
-  const { previewImage, Group, numAttending } = event;
+  const history = useHistory();
+  const { id, groupId, previewImage, Group, numAttending } = event;
 
   // convert startDate timestamp into text format
   // example: Fri, May 13 ⸱ 9:30 pm
@@ -19,7 +21,10 @@ function EventCard({ event }) {
     numAttending + " " + (numAttending == 1 ? "attendee" : "attendees");
 
   return (
-    <div className="card">
+    <div
+      className="card"
+      onClick={() => history.push(`/groups/${groupId}/events/${id}`)}
+    >
       <div className="preview-image-container">
         <img className="preview-image" src={previewImage} />
       </div>
