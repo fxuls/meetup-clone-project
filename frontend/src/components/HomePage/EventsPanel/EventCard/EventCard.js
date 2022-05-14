@@ -24,7 +24,7 @@ function EventCard({ event }) {
         <img className="preview-image" src={previewImage} />
       </div>
       <div className="card-info">
-        <p className="start-date">{startDateString}</p>
+        <p className="date-line">{startDateString}</p>
         <p className="name">{event.name}</p>
         <p className="group-info">{groupInfo}</p>
         <p className="attending-count">{attendingInfo}</p>
