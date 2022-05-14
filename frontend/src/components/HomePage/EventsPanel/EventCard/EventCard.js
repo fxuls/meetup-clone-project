@@ -6,7 +6,9 @@ function EventCard({ event }) {
       <div className="preview-image-container">
         <img className="preview-image" src={previewImage} />
       </div>
-      <p>{event.name}</p>
+      <div className="card-info">
+        <p>{event.name}</p>
+      </div>
     </div>
   );
 }
