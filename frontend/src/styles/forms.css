@@ -33,7 +33,7 @@
     font-weight: bolder;
     font-size: larger;
     border: none;
-    border-radius: 0.8em;
+    border-radius: var(--border-radius);
     padding: 0.8em;
 }
 
