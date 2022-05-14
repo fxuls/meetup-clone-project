@@ -4,6 +4,7 @@ import { fetchGroups } from "../../store/groups";
 import { fetchEvents } from "../../store/events";
 import GroupsPanel from "./GroupsPanel/GroupsPanel";
 import EventsPanel from "./EventsPanel/EventsPanel";
+import { useLocation } from "react-router-dom";
 
 import "./HomePage.css";
 
@@ -12,9 +13,13 @@ const EVENTS = "homepage/EVENTS";
 
 function HomePage() {
   const dispatch = useDispatch();
+  const location = useLocation();
 
+  if (location.search.includes("source=GROUPS")) window.lol = location;
   // open the groups tab by default
-  const [currentPage, setCurrentPage] = useState(GROUPS);
+  const [currentPage, setCurrentPage] = useState(
+    location.search.includes("source=EVENTS") ? EVENTS : GROUPS
+  );
 
   useEffect(() => {
     dispatch(fetchGroups());
