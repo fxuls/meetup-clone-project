@@ -53,7 +53,8 @@
     grid-template-columns: 2fr 5fr;
     grid-template-rows: 9.6em;
     justify-content: center;
-    align-items: center;
+    align-items:flex-start;
+    gap: 1em;
 }
 
 .preview-image-container {
