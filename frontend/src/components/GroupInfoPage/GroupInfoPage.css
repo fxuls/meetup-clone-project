@@ -1,7 +1,7 @@
 .group-page {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 16em auto 100%;
+    grid-template-rows: 16em min-content auto;
     padding: 1em;
     max-width: 65em;
     min-width: 40em;
@@ -12,8 +12,8 @@
 }
 
 .group-page .preview-image-cell {
-    grid-column: 1 / 1;
-    grid-row: 1 / 1;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
 }
 
 .group-page .preview-image-container {
@@ -23,8 +23,8 @@
 }
 
 .group-page .header-info {
-    grid-column: 2 / 2;
-    grid-row: 1 / 1;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
     display: flex;
     flex-direction: column;
     gap: 0.20em;
@@ -40,10 +40,16 @@
 
 .group-page .nav-bar {
     grid-column: 1 / 3;
-    grid-row: 2 / 2;
+    grid-row: 2 / 3;
+}
+
+.group-page .nav-bar a {
+    text-decoration: none;
+    color: var(--main-grey);
+    font-size: 1.5em;
 }
 
 .group-page .content {
     grid-column: 1 / 3;
-    grid-row: 3 / 3;
+    grid-row: 3 / 4;
 }
