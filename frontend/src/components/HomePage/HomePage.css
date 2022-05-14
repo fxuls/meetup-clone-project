@@ -121,7 +121,7 @@
 
 p.sub-text {
     line-height: 1.3em;
-    font-size: smaller;
+    font-size: 1rem;
     color: var(--light-grey);
 }
 
