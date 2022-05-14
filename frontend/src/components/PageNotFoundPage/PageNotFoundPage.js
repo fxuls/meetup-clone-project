@@ -1,8 +1,16 @@
+import { Link } from "react-router-dom";
+
+import "./PageNotFoundPage.css";
+
 function PageNotFoundPage () {
     return (
-        <>
-            <h1>Page not found</h1>
-        </>
+        <div className="pnf-page">
+            <div className="pnf-container">
+                <h1>404</h1>
+                <p>Whoops! That page was not found or is unavailable.</p>
+                <Link to="/" className="home-button">Go Back to Home</Link>
+            </div>
+        </div>
     )
 }
 
