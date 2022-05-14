@@ -4,6 +4,7 @@
 
     margin: 2em 16%;
     min-height: 20em;
+    min-width: 33em;
 }
 
 .nav-bar {
@@ -52,7 +53,6 @@
 
 .card {
     padding: 1.4em;
-    min-width: 33em;
     display: grid;
     grid-template-columns: 12em 5fr;
     justify-content: center;
