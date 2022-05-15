@@ -9,6 +9,7 @@
 
 .group-grid {
     display: grid;
+    width: 100%;
     grid-template-columns: 24em auto;
     grid-template-rows: 16em min-content 1fr;
     gap: 0.8em;
