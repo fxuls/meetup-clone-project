@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 export const SET_GROUPS = "groups/SET_GROUPS";
 export const SET_GROUP = "groups/SET_GROUP";
 export const SET_MEMBERS = "groups/SET_MEMBERS";
+export const SET_GROUP_EVENTS = "groups/SET_GROUP_EVENTS";
 
 export const allGroupsSelector = (state) => state.groups;
 export const groupSelector = (groupId) => (state) => state.groups[groupId];
@@ -35,10 +36,20 @@ export function setMembers(groupId, members) {
   };
 }
 
+// SET_GROUP_EVENTS action creator
+export function setGroupEvents(groupId, events) {
+  return {
+    type: SET_GROUP_EVENTS,
+    groupId,
+    events,
+  };
+}
+
 // fetch all groups thunk
 export const fetchGroups = () => async (dispatch) => {
   const res = await csrfFetch("/api/groups");
   const data = await res.json();
+
   dispatch(setGroups(data.Groups));
   return res;
 };
@@ -46,6 +57,7 @@ export const fetchGroups = () => async (dispatch) => {
 // fetch group thunk
 export const fetchGroup = (groupId) => async (dispatch) => {
   const res = await csrfFetch(`/api/groups/${groupId}`);
+
   const data = await res.json();
   dispatch(setGroup(data));
   return res;
@@ -55,16 +67,31 @@ export const fetchGroup = (groupId) => async (dispatch) => {
 export const fetchMembers = (groupId) => async (dispatch) => {
   const res = await csrfFetch(`/api/groups/${groupId}/members`);
   const data = await res.json();
+
+  // parse ids into obj keys
   const membersObj = {};
-  data.Members.forEach((member) => {
-    membersObj[member.id] = member;
-  });
+  data.Members.forEach((member) => (membersObj[member.id] = member));
+
   dispatch(setMembers(groupId, membersObj));
+  return res;
+};
+
+// fetch group events thunk
+export const fetchGroupEvents = (groupId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/groups/${groupId}/events`);
+  const data = await res.json();
+
+  // parse ids into obj keys
+  const eventsObj = {};
+  data.Events.forEach((event) => (eventsObj[event.id] = event));
+
+  dispatch(setGroupEvents(groupId, eventsObj));
   return res;
 };
 
 export default function groupsReducer(state = {}, action) {
   const newGroups = { ...state };
+  const { groupId } = action;
 
   switch (action.type) {
     case SET_GROUPS:
@@ -72,16 +99,21 @@ export default function groupsReducer(state = {}, action) {
         newObj[group.id] = group;
         return newObj;
       }, {});
+
     case SET_GROUP:
       newGroups[action.group.id] = action.group;
       break;
+
     case SET_MEMBERS:
-      const { groupId, members } = action;
-      if (newGroups[groupId]) {
-        newGroups[groupId].members = members;
-      } else {
-        newGroups[groupId] = { members };
-      }
+      const { members } = action;
+      if (newGroups[groupId]) newGroups[groupId].members = members;
+      else newGroups[groupId] = { members };
+      break;
+
+    case SET_GROUP_EVENTS:
+      const { events } = action;
+      if (newGroups[groupId]) newGroups[groupId].events = events;
+      else newGroups[groupId] = { events };
       break;
   }
 
