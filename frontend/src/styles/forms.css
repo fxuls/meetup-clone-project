@@ -72,3 +72,13 @@ form .form-fields .field-row {
 form .form-fields .field-row > label {
     font-weight:700;
 }
+
+.form-container button.demo-login {
+    color: var(--contrasting-text-color);
+    background-color: var(--main-color);
+    border-radius: var(--border-radius);
+    border: none;
+    padding: 0.5em;
+    font-weight: bold;
+    margin-top: 0.5em;
+}

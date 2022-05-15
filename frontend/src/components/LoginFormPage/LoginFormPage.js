@@ -3,6 +3,9 @@ import { login, userSelector } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
+const DEMO_USER_EMAIL = "testuser@gmail.com";
+const DEMO_USER_PASSWORD = "password";
+
 function LoginFormPage() {
   const dispatch = useDispatch();
 
@@ -32,11 +35,17 @@ function LoginFormPage() {
     });
   };
 
+  const demoLoginClick = () => {
+    setEmail(DEMO_USER_EMAIL);
+    setPassword(DEMO_USER_PASSWORD);
+  }
+
   return (
     <div className="form-page">
       <div className="form-container">
         <h1 className="unselectable">Log in</h1>
         <p>Not a member yet? <Link className="link" to="/signup">Sign up</Link></p>
+        <button className="demo-login" onClick={demoLoginClick}>Demo User</button>
         <form id="login-form" onSubmit={handleSubmit}>
           <div className="form-fields">
             {loginFailed ? (
