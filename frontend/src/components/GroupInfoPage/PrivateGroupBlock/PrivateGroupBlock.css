@@ -29,3 +29,8 @@
 .private-block button:hover {
     cursor: pointer;
 }
+
+.private-block .requested-feedback {
+    margin-top: 1em;
+    color: var(--main-color);
+}
