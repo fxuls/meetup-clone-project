@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       scopes: {
         simple: {
-          attributes: ["name", "city", "state"]
+          attributes: ["name", "city", "state", "private"]
         },
         private: {
           attributes: ["private"]
