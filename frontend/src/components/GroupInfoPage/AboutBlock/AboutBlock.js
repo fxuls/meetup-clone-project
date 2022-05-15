@@ -1,5 +1,7 @@
 import "./AboutBlock.css";
 
+// TODO add members list
+
 function AboutBlock({ about, organizer }) {
   return (
     <div className="about-block">
