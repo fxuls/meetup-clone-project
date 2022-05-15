@@ -1,0 +1,35 @@
+.about-block {
+    display: flex;
+    gap: 0.8em;
+}
+
+.about-block h2 {
+    margin: 0;
+    font-size: larger;
+    color: var(--main-color);
+}
+
+.about-block .member-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 37rem;
+}
+
+.about-block .description {
+    width: auto;
+}
+
+.about-block .description p {
+    color: var(--main-grey)
+}
+
+.about-block .organizer-info p {
+    margin: 0.7em 0 0 0;
+    color: var(--main-grey);
+}
+
+.about-block .member-list {
+    margin: 0;
+    padding: 0;
+}
