@@ -3,7 +3,7 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 16em min-content auto;
     padding: 1em;
-    max-width: 65em;
+    max-width: 60em;
     min-width: 40em;
     gap: 0.8em;
     min-height: 33em;
@@ -41,6 +41,7 @@
 .group-page .nav-bar {
     grid-column: 1 / 3;
     grid-row: 2 / 3;
+    padding: 0;
 }
 
 .group-page .nav-bar a {
