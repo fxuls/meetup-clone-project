@@ -12,3 +12,7 @@
     box-shadow: var(--heavy-box-shadow);
     border-radius: var(--border-radius);
 }
+
+.info-page .spinner {
+    margin: auto;
+}
