@@ -10,6 +10,8 @@ import PrivateGroupBlock from "./PrivateGroupBlock";
 
 import "./GroupInfoPage.css";
 
+// TODO make group display if user is member of the group
+
 function GroupInfoPage(props) {
   const dispatch = useDispatch();
   const location = useLocation();
