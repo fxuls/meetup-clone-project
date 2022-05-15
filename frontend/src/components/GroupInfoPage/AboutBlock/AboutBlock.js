@@ -4,7 +4,6 @@ import { membersSelector } from "../../../store/groups";
 import "./AboutBlock.css";
 
 function AboutBlock({ about, organizer, members }) {
-  console.log(members);
   return (
     <div className="about-block">
       <div className="description">
