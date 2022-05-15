@@ -6,9 +6,9 @@ function EventsBlock({ events }) {
   return (
     <div className="events-block">
       <ul className="events-list">
-          {Object.values(events).map((event) => (<li key={event.id}>
+          {events ? Object.values(events).map((event) => (<li key={event.id}>
             <EventCard event={event} />
-          </li>))}
+          </li>)) : null}
       </ul>
     </div>
   );
