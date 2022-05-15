@@ -7,6 +7,7 @@ import {
   fetchMembers,
   membersSelector,
 } from "../../store/groups";
+import { userSelector } from "../../store/session";
 import { stateToAbrev } from "../../utils/index";
 import Spinner from "../Spinner";
 import AboutBlock from "./AboutBlock";
@@ -15,14 +16,17 @@ import PrivateGroupBlock from "./PrivateGroupBlock";
 
 import "./GroupInfoPage.css";
 
-// TODO make group display if user is member of the group
-
 function GroupInfoPage(props) {
   const dispatch = useDispatch();
   const location = useLocation();
   const { groupId } = useParams();
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // get group info
+  const group = useSelector(groupSelector(groupId));
+  const members = useSelector(membersSelector(groupId));
+  const user = useSelector(userSelector);
 
   // on initial render fetch group info and members
   useEffect(() => {
@@ -33,9 +37,11 @@ function GroupInfoPage(props) {
     });
   }, []);
 
-  // get group info
-  const group = useSelector(groupSelector(groupId));
-  const members = useSelector(membersSelector(groupId));
+  const getUserStatus = () => {
+    if (!isLoaded) return null;
+    if (group.organizerId == user.id) return "organizer";
+    return members[user.id] ? members[user.id].Membership.status : null;
+  };
 
   // if is not loaded yet display spinner
   if (!isLoaded)
@@ -44,6 +50,12 @@ function GroupInfoPage(props) {
         <Spinner />
       </div>
     );
+
+  // get the status of authenticated user in this group
+  const currentUserStatus = (() => {
+    if (group.organizerId == user.id) return "organizer";
+    return members && members[user.id] ? members[user.id].Membership.status : null;
+  })();
 
   const { previewImage, name, city, state, numMembers, Organizer, about } =
     group;
@@ -84,7 +96,7 @@ function GroupInfoPage(props) {
           </Link>
         </div>
         <div className="content">
-          {group.private ? (
+          {group.private && !currentUserStatus ? (
             <PrivateGroupBlock groupId={groupId} />
           ) : (
             <Switch>
