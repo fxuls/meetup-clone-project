@@ -53,7 +53,9 @@ function GroupInfoPage(props) {
 
   // get the status of authenticated user in this group
   const currentUserStatus = (() => {
+    if (!group || !user) return null;
     if (group.organizerId == user.id) return "organizer";
+    
     return members && members[user.id] ? members[user.id].Membership.status : null;
   })();
 
