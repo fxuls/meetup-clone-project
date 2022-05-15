@@ -1,12 +1,3 @@
-.group-page {
-    padding: 1em;
-    max-width: 48em;
-    min-width: min-content;
-    min-height: 33em;
-    box-shadow: var(--heavy-box-shadow);
-    border-radius: var(--border-radius);
-}
-
 .group-grid {
     display: grid;
     width: 100%;
