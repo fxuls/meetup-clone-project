@@ -55,7 +55,12 @@ export const fetchAttendees = (eventId) => async (dispatch) => {
     const data = await res.json();
 
     const attendeesObj = {};
-    data.Attendees.forEach((attendee) => attendeesObj[attendee.id] = attendee);
+    data.Attendees.forEach((attendee) => attendeesObj[attendee.id] = {
+        id: attendee.id,
+        firstName: attendee.firstName,
+        lastName: attendee.lastName,
+        status: attendee.Attendance.status,
+    });
 
     dispatch(setAttendees(eventId, attendeesObj));
     return res;
