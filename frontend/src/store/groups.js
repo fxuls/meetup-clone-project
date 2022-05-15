@@ -10,6 +10,8 @@ export const allGroupsSelector = (state) => state.groups;
 export const groupSelector = (groupId) => (state) => state.groups[groupId];
 export const membersSelector = (groupId) => (state) =>
   state.groups[groupId]?.members;
+export const groupEventsSelector = (groupId) => (state) =>
+  state.groups[groupId]?.events;
 
 // SET_GROUPS action creator
 export function setGroups(groups) {
