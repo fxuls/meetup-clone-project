@@ -62,10 +62,6 @@
     border-bottom: 0.2em solid transparent;
 }
 
-.group-page .nav-bar .active {
-    color: red;
-}
-
 .group-page .content {
     grid-column: 1 / 3;
     grid-row: 3 / 4;
