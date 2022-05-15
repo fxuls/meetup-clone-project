@@ -17,9 +17,15 @@ function AboutBlock({ about, organizer, members }) {
         </div>
         <ul className="member-list">
           <h2>Members</h2>
-          {Object.values(members).map(member => {
-            return <li key={member.id}>{`${member.firstName} ${member.lastName}`}</li>
-          })}
+          {members
+            ? Object.values(members).map((member) => {
+                return (
+                  <li
+                    key={member.id}
+                  >{`${member.firstName} ${member.lastName}`}</li>
+                );
+              })
+            : null}
         </ul>
       </div>
     </div>
