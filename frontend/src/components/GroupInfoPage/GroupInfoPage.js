@@ -6,6 +6,8 @@ import {
   groupSelector,
   fetchMembers,
   membersSelector,
+  fetchGroupEvents,
+  groupEventsSelector,
 } from "../../store/groups";
 import { userSelector } from "../../store/session";
 import { stateToAbrev } from "../../utils/index";
@@ -26,15 +28,16 @@ function GroupInfoPage(props) {
   // get group info
   const group = useSelector(groupSelector(groupId));
   const members = useSelector(membersSelector(groupId));
+  const events = useSelector(groupEventsSelector(groupId));
   const user = useSelector(userSelector);
 
   // on initial render fetch group info and members
   useEffect(() => {
-    dispatch(fetchGroup(groupId)).then(() => {
-      dispatch(fetchMembers(groupId)).then(() => {
-        setIsLoaded(true);
-      });
-    });
+    Promise.all([
+      dispatch(fetchGroup(groupId)),
+      dispatch(fetchMembers(groupId)),
+      dispatch(fetchGroupEvents(groupId)),
+    ]).then(() => setIsLoaded(true));
   }, []);
 
   const getUserStatus = () => {
@@ -55,8 +58,10 @@ function GroupInfoPage(props) {
   const currentUserStatus = (() => {
     if (!group || !user) return null;
     if (group.organizerId == user.id) return "organizer";
-    
-    return members && members[user.id] ? members[user.id].Membership.status : null;
+
+    return members && members[user.id]
+      ? members[user.id].Membership.status
+      : null;
   })();
 
   const { previewImage, name, city, state, numMembers, Organizer, about } =
@@ -103,7 +108,7 @@ function GroupInfoPage(props) {
           ) : (
             <Switch>
               <Route exact path="/groups/:groupId/events">
-                <EventsBlock />
+                <EventsBlock events={events}/>
               </Route>
               <Route path="/groups/:groupId">
                 <AboutBlock
