@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux";
+import { membersSelector } from "../../../store/groups";
+
 import "./AboutBlock.css";
 
-// TODO add members list
-
-function AboutBlock({ about, organizer }) {
+function AboutBlock({ about, organizer, members }) {
+  console.log(members);
   return (
     <div className="about-block">
       <div className="description">
@@ -16,6 +18,9 @@ function AboutBlock({ about, organizer }) {
         </div>
         <ul className="member-list">
           <h2>Members</h2>
+          {members.map(member => {
+            return <li key={member.id}>{`${member.firstName} ${member.lastName}`}</li>
+          })}
         </ul>
       </div>
     </div>
