@@ -7,7 +7,8 @@ export const SET_MEMBERS = "groups/SET_MEMBERS";
 
 export const allGroupsSelector = (state) => state.groups;
 export const groupSelector = (groupId) => (state) => state.groups[groupId];
-export const membersSelector = (groupId) => (state) => state.groups[groupId]?.members;
+export const membersSelector = (groupId) => (state) =>
+  state.groups[groupId]?.members;
 
 // SET_GROUPS action creator
 export function setGroups(groups) {
@@ -54,7 +55,11 @@ export const fetchGroup = (groupId) => async (dispatch) => {
 export const fetchMembers = (groupId) => async (dispatch) => {
   const res = await csrfFetch(`/api/groups/${groupId}/members`);
   const data = await res.json();
-  dispatch(setMembers(groupId, data.Members));
+  const membersObj = {};
+  data.Members.forEach((member) => {
+    membersObj[member.id] = member;
+  });
+  dispatch(setMembers(groupId, membersObj));
   return res;
 };
 
