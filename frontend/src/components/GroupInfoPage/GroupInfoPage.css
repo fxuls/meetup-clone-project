@@ -1,7 +1,7 @@
 .group-page {
     padding: 1em;
     max-width: 48em;
-    min-width: 40em;
+    min-width: min-content;
     min-height: 33em;
     box-shadow: var(--heavy-box-shadow);
     border-radius: var(--border-radius);
