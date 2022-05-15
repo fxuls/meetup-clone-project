@@ -25,7 +25,7 @@ function GroupInfoPage(props) {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // get group info
+  // get state info
   const group = useSelector(groupSelector(groupId));
   const members = useSelector(membersSelector(groupId));
   const events = useSelector(groupEventsSelector(groupId));
@@ -49,7 +49,7 @@ function GroupInfoPage(props) {
   // if is not loaded yet display spinner
   if (!isLoaded)
     return (
-      <div className="info-page group-page">
+      <div className="info-page container group-page">
         <Spinner />
       </div>
     );
