@@ -104,7 +104,7 @@ router.get(
     event.eventImages = imagesToUrls(event.eventImages);
 
     // convert preview image to url
-    event.previewImage = event.previewImage.url;
+    event.previewImage = event.previewImage?.url;
 
     res.json(event);
   })
