@@ -334,7 +334,6 @@ router.post(
     const attendance = await Attendee.findOne({ where: { eventId, userId } });
     if (attendance) {
       const status = attendance.status;
-      res.status(400);
 
       // if user is already attending
       if (status === "member") {
