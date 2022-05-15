@@ -70,11 +70,13 @@ function GroupInfoPage(props) {
   return (
     <div className="info-page container group-page">
       <div className="group-grid">
+
         <div className="preview-image-cell">
           <div className="preview-image-container">
             <img src={previewImage} />
           </div>
         </div>
+
         <div className="header-info">
           <h1>{name}</h1>
           <p className="location sub-text">{`${city}, ${stateToAbrev(
@@ -88,6 +90,7 @@ function GroupInfoPage(props) {
             <span className="organizer-name">{`${Organizer.firstName} ${Organizer.lastName}`}</span>
           </p>
         </div>
+
         <div className="nav-bar">
           <Link
             active={!location.pathname.toLowerCase().endsWith("events") + ""}
@@ -102,6 +105,7 @@ function GroupInfoPage(props) {
             Events
           </Link>
         </div>
+
         <div className="content">
           {group.private && !currentUserStatus ? (
             <PrivateGroupBlock groupId={groupId} />
@@ -120,6 +124,7 @@ function GroupInfoPage(props) {
             </Switch>
           )}
         </div>
+        
       </div>
     </div>
   );
