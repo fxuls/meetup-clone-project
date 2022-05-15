@@ -1,7 +1,12 @@
 import { useParams, Switch, Route, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchGroup, groupSelector, fetchMembers, membersSelector } from "../../store/groups";
+import {
+  fetchGroup,
+  groupSelector,
+  fetchMembers,
+  membersSelector,
+} from "../../store/groups";
 import { stateToAbrev } from "../../utils/index";
 import Spinner from "../Spinner";
 import AboutBlock from "./AboutBlock";
@@ -35,7 +40,7 @@ function GroupInfoPage(props) {
   // if is not loaded yet display spinner
   if (!isLoaded)
     return (
-      <div className="info-page">
+      <div className="info-page group-page">
         <Spinner />
       </div>
     );
@@ -45,49 +50,57 @@ function GroupInfoPage(props) {
 
   return (
     <div className="info-page group-page">
-      <div className="preview-image-cell">
-        <div className="preview-image-container">
-          <img src={previewImage} />
+      <div className="group-grid">
+        <div className="preview-image-cell">
+          <div className="preview-image-container">
+            <img src={previewImage} />
+          </div>
         </div>
-      </div>
-      <div className="header-info">
-        <h1>{name}</h1>
-        <p className="location sub-text">{`${city}, ${stateToAbrev(state)}`}</p>
-        <p className="info sub-text">{`${numMembers} members • ${
-          group.private ? "Private group" : "Public group"
-        }`}</p>
-        <p className="organizer sub-text">
-          Organized by{" "}
-          <span className="organizer-name">{`${Organizer.firstName} ${Organizer.lastName}`}</span>
-        </p>
-      </div>
-      <div className="nav-bar">
-        <Link
-          active={!location.pathname.toLowerCase().endsWith("events") + ""}
-          to={`/groups/${groupId}/`}
-        >
-          About
-        </Link>
-        <Link
-          active={location.pathname.toLowerCase().endsWith("events") + ""}
-          to={`/groups/${groupId}/events`}
-        >
-          Events
-        </Link>
-      </div>
-      <div className="content">
-        {group.private ? (
-          <PrivateGroupBlock />
-        ) : (
-          <Switch>
-            <Route exact path="/groups/:groupId/events">
-              <EventsBlock />
-            </Route>
-            <Route path="/groups/:groupId">
-              <AboutBlock about={about} organizer={Organizer} members={members}/>
-            </Route>
-          </Switch>
-        )}
+        <div className="header-info">
+          <h1>{name}</h1>
+          <p className="location sub-text">{`${city}, ${stateToAbrev(
+            state
+          )}`}</p>
+          <p className="info sub-text">{`${numMembers} members • ${
+            group.private ? "Private group" : "Public group"
+          }`}</p>
+          <p className="organizer sub-text">
+            Organized by{" "}
+            <span className="organizer-name">{`${Organizer.firstName} ${Organizer.lastName}`}</span>
+          </p>
+        </div>
+        <div className="nav-bar">
+          <Link
+            active={!location.pathname.toLowerCase().endsWith("events") + ""}
+            to={`/groups/${groupId}/`}
+          >
+            About
+          </Link>
+          <Link
+            active={location.pathname.toLowerCase().endsWith("events") + ""}
+            to={`/groups/${groupId}/events`}
+          >
+            Events
+          </Link>
+        </div>
+        <div className="content">
+          {group.private ? (
+            <PrivateGroupBlock groupId={groupId} />
+          ) : (
+            <Switch>
+              <Route exact path="/groups/:groupId/events">
+                <EventsBlock />
+              </Route>
+              <Route path="/groups/:groupId">
+                <AboutBlock
+                  about={about}
+                  organizer={Organizer}
+                  members={members}
+                />
+              </Route>
+            </Switch>
+          )}
+        </div>
       </div>
     </div>
   );
