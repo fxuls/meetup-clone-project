@@ -53,3 +53,12 @@ a {
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
 }
+
+.hover-shadow {
+  box-shadow: var(--light-box-shadow);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.hover-shadow:hover {
+  box-shadow: var(--heavy-box-shadow);
+}
