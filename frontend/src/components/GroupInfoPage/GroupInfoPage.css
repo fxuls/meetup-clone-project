@@ -40,6 +40,7 @@
 
 .group-page .header-info .organizer-name {
     color: var(--main-color);
+    font-weight: bold;
 }
 
 .group-page .nav-bar {
