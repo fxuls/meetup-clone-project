@@ -1,7 +1,7 @@
 import { useParams, Switch, Route, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchGroup, groupSelector } from "../../store/groups";
+import { fetchGroup, groupSelector, fetchMembers, membersSelector } from "../../store/groups";
 import { stateToAbrev } from "../../utils/index";
 import Spinner from "../Spinner";
 import AboutBlock from "./AboutBlock";
@@ -19,13 +19,18 @@ function GroupInfoPage(props) {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // on initial render fetch group info
+  // on initial render fetch group info and members
   useEffect(() => {
-    dispatch(fetchGroup(groupId)).then(() => setIsLoaded(true));
+    dispatch(fetchGroup(groupId)).then(() => {
+      dispatch(fetchMembers(groupId)).then(() => {
+        setIsLoaded(true);
+      });
+    });
   }, []);
 
   // get group info
   const group = useSelector(groupSelector(groupId));
+  const members = useSelector(membersSelector(groupId));
 
   // if is not loaded yet display spinner
   if (!isLoaded)
@@ -35,7 +40,8 @@ function GroupInfoPage(props) {
       </div>
     );
 
-  const { previewImage, name, city, state, numMembers, Organizer, about } = group;
+  const { previewImage, name, city, state, numMembers, Organizer, about } =
+    group;
 
   return (
     <div className="info-page group-page">
@@ -56,19 +62,32 @@ function GroupInfoPage(props) {
         </p>
       </div>
       <div className="nav-bar">
-        <Link active={!location.pathname.toLowerCase().endsWith("events") + ""} to={`/groups/${groupId}/`}>About</Link>
-        <Link active={location.pathname.toLowerCase().endsWith("events") + ""} to={`/groups/${groupId}/events`}>Events</Link>
+        <Link
+          active={!location.pathname.toLowerCase().endsWith("events") + ""}
+          to={`/groups/${groupId}/`}
+        >
+          About
+        </Link>
+        <Link
+          active={location.pathname.toLowerCase().endsWith("events") + ""}
+          to={`/groups/${groupId}/events`}
+        >
+          Events
+        </Link>
       </div>
       <div className="content">
-          {group.private ? <PrivateGroupBlock /> :
-        <Switch>
-          <Route exact path="/groups/:groupId/events">
-            <EventsBlock />
-          </Route>
-          <Route path="/groups/:groupId">
-            <AboutBlock about={about} organizer={Organizer}/>
-          </Route>
-        </Switch>}
+        {group.private ? (
+          <PrivateGroupBlock />
+        ) : (
+          <Switch>
+            <Route exact path="/groups/:groupId/events">
+              <EventsBlock />
+            </Route>
+            <Route path="/groups/:groupId">
+              <AboutBlock about={about} organizer={Organizer} members={members}/>
+            </Route>
+          </Switch>
+        )}
       </div>
     </div>
   );
