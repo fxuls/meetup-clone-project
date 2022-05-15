@@ -21,7 +21,8 @@
 }
 
 .about-block .description p {
-    color: var(--main-grey)
+    color: var(--main-grey);
+    margin: 0;
 }
 
 .about-block .organizer-info p {
