@@ -38,6 +38,10 @@
     margin: 0;
 }
 
+.group-page .header-info .organizer-name {
+    color: var(--main-grey);
+}
+
 .group-page .nav-bar {
     grid-column: 1 / 3;
     grid-row: 2 / 3;
