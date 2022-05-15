@@ -1,3 +1,5 @@
+import "./EventInfoPage.css";
+
 function EventInfoPage () {
     return (<div className="event-page">
         Event Page
