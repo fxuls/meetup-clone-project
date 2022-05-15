@@ -1,6 +1,5 @@
 .info-page {
     display: flex;
-    flex-direction: column;
     height: auto;
     margin: 2em 16%;
 }
