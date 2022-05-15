@@ -8,7 +8,7 @@ function PageNotFoundPage () {
             <div className="pnf-container">
                 <h1>404</h1>
                 <p>Whoops! That page was not found or is unavailable.</p>
-                <Link to="/" className="home-button">Go Back to Home</Link>
+                <Link to="/" className="home-button">Return Home</Link>
             </div>
         </div>
     )
