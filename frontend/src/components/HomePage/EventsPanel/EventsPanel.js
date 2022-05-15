@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { allEventsSelector } from "../../../store/events";
 import EventCard from "./EventCard/EventCard";
 
+// TODO hide events from private groups user is not part of
+
 function EventsPanel() {
   const events = Object.values(useSelector(allEventsSelector));
 
