@@ -10,7 +10,7 @@ function PrivateGroupBlock({ groupId }) {
   const history = useHistory();
 
   const [hasRequestedJoin, setHasRequestedJoin] = useState(false);
-  const [requestedFeedback, setRequestedFeedback] = useState("Thanks, you'll hear from the organizer soon");
+  const [requestedFeedback, setRequestedFeedback] = useState("");
 
   const user = useSelector(userSelector);
 
@@ -23,7 +23,8 @@ function PrivateGroupBlock({ groupId }) {
       const data = await res.json();
 
       setHasRequestedJoin(true);
-      if (res.statusCode !== 200) setRequestedFeedback(data.message);
+      if (data.status) setRequestedFeedback("Thanks, you'll hear from the organizer soon");
+      else setRequestedFeedback(data.message ? data.message : "Something went wrong");
     }
 
     // if not logged in send user to login page
