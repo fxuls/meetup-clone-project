@@ -6,6 +6,7 @@ import { stateToAbrev } from "../../utils/index";
 import Spinner from "../Spinner";
 import AboutBlock from "./AboutBlock";
 import EventsBlock from "./EventsBlock";
+import PrivateGroupBlock from "./PrivateGroupBlock";
 
 import "./GroupInfoPage.css";
 
@@ -32,7 +33,7 @@ function GroupInfoPage(props) {
       </div>
     );
 
-  const { previewImage, name, city, state, numMembers, Organizer } = group;
+  const { previewImage, name, city, state, numMembers, Organizer, about } = group;
 
   return (
     <div className="info-page group-page">
@@ -57,14 +58,15 @@ function GroupInfoPage(props) {
         <Link active={location.pathname.toLowerCase().endsWith("events") + ""} to={`/groups/${groupId}/events`}>Events</Link>
       </div>
       <div className="content">
+          {group.private ? <PrivateGroupBlock /> :
         <Switch>
           <Route exact path="/groups/:groupId/events">
             <EventsBlock />
           </Route>
           <Route path="/groups/:groupId">
-            <AboutBlock />
+            <AboutBlock about={about} organizer={Organizer}/>
           </Route>
-        </Switch>
+        </Switch>}
       </div>
     </div>
   );
