@@ -1,14 +1,17 @@
 .group-page {
-    display: grid;
-    grid-template-columns: 24em auto;
-    grid-template-rows: 16em min-content auto;
     padding: 1em;
     max-width: 48em;
     min-width: 40em;
-    gap: 0.8em;
     min-height: 33em;
     box-shadow: var(--heavy-box-shadow);
     border-radius: var(--border-radius);
+}
+
+.group-grid {
+    display: grid;
+    grid-template-columns: 24em auto;
+    grid-template-rows: 16em min-content auto;
+    gap: 0.8em;
 }
 
 .group-page .preview-image-cell {
@@ -71,4 +74,8 @@
 .group-page .content {
     grid-column: 1 / 3;
     grid-row: 3 / 4;
+}
+
+.group-page .spinner {
+    margin: auto;
 }
