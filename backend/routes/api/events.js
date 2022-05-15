@@ -84,6 +84,7 @@ router.get(
         { model: Group.scope(["simple", "private"]) },
         { model: Venue.scope("excludeGroupId") },
         { model: Image, as: "eventImages" },
+        { model: Image, as: "previewImage" },
       ],
     });
 
@@ -101,6 +102,9 @@ router.get(
 
     // convert Image models to urls
     event.eventImages = imagesToUrls(event.eventImages);
+
+    // convert preview image to url
+    event.previewImage = event.previewImage.url;
 
     res.json(event);
   })
