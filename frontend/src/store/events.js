@@ -25,7 +25,7 @@ export function setEvent(event) {
 }
 
 // SET_ATTENDEES action creator
-export function setAttendees(evnetId, attendees) {
+export function setAttendees(eventId, attendees) {
     return {
         type: SET_ATTENDEES,
         eventId,
