@@ -68,7 +68,7 @@ function GroupInfoPage(props) {
     group;
 
   return (
-    <div className="info-page group-page">
+    <div className="info-page container group-page">
       <div className="group-grid">
         <div className="preview-image-cell">
           <div className="preview-image-container">
