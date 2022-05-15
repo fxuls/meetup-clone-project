@@ -266,7 +266,8 @@ router.post(
     for (let i = 0; i < members.length; i++) {
       const member = members[i];
 
-      if (member.userId === userId) {
+      if (member.userId == userId) {
+        res.status(400);
         if (member.status === "pending") {
           return res.json({
             message: "Membership has already been requested",
