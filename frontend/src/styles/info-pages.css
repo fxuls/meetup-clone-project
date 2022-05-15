@@ -3,3 +3,12 @@
     height: auto;
     margin: 2em 16%;
 }
+
+.info-page.container {
+    padding: 1em;
+    max-width: 48em;
+    min-width: min-content;
+    min-height: 33em;
+    box-shadow: var(--heavy-box-shadow);
+    border-radius: var(--border-radius);
+}
