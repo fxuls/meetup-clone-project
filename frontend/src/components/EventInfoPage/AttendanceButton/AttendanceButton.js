@@ -79,13 +79,13 @@ function AttendanceButton({ eventId, attendees, members, group }) {
 
   // user clicked cancel
   if (hasCancelledAttendance) {
-    return <p>{hasCancelledAttendance ? <p>{cancelledFeedback}</p> : null}</p>;
+    return <div className="attendance-button"><p>{hasCancelledAttendance ? <p>{cancelledFeedback}</p> : null}</p></div>;
   }
 
   // user is already a member
   if (userAttendance) {
     return (
-      <div>
+      <div className="attendance-button">
         <p>
           {userAttendance === "member"
             ? "You are attending this event"
@@ -97,7 +97,7 @@ function AttendanceButton({ eventId, attendees, members, group }) {
   }
 
   return (
-    <div>
+    <div className="attendance-button">
       {hasRequestedAttendance ? (
         <p className="requested-feedback">{requestedFeedback}</p>
       ) : (
