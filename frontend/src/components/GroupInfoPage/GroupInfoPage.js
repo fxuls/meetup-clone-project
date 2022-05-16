@@ -1,4 +1,11 @@
-import { useParams, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+import {
+  useParams,
+  Switch,
+  Route,
+  Link,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -98,14 +105,23 @@ function GroupInfoPage(props) {
             Organized by{" "}
             <span className="organizer-name">{`${Organizer.firstName} ${Organizer.lastName}`}</span>
           </p>
-
-          <div className="organizer-controls">
-            <button onClick={() => history.push(`/groups/${groupId}/events/new`)}>New Event</button>
-            <button onClick={() => {
-              if (!hasClickedDelete) return setHasClickedDelete(true);
-              dispatch(deleteGroup(group.id)).then(() => history.push("/"));
-            }}>{hasClickedDelete ? "Click to Confirm" : "Delete Group"}</button>
-          </div>
+          {isOrganizer ? (
+            <div className="organizer-controls">
+              <button
+                onClick={() => history.push(`/groups/${groupId}/events/new`)}
+              >
+                New Event
+              </button>
+              <button
+                onClick={() => {
+                  if (!hasClickedDelete) return setHasClickedDelete(true);
+                  dispatch(deleteGroup(group.id)).then(() => history.push("/"));
+                }}
+              >
+                {hasClickedDelete ? "Click to Confirm" : "Delete Group"}
+              </button>
+            </div>
+          ) : null}
         </div>
 
         <div className="nav-bar">
