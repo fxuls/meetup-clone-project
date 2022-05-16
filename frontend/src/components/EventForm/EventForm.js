@@ -5,7 +5,7 @@ import { userSelector } from "../../store/session";
 import { groupSelector } from "../../store/groups";
 import { createEvent } from "../../store/events";
 
-function EventForm() {
+function EventForm({ fields }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { groupId, eventId } = useParams();
@@ -13,13 +13,13 @@ function EventForm() {
   const user = useSelector(userSelector);
   const group = useSelector(groupSelector(groupId));
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [type, setType] = useState("inperson");
-  const [capacity, setCapacity] = useState(10);
-  const [price, setPrice] = useState(0.0);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [name, setName] = useState(fields?.name || "");
+  const [description, setDescription] = useState(fields?.description || "");
+  const [type, setType] = useState(fields?.type || "inperson");
+  const [capacity, setCapacity] = useState(fields?.capacity || 10);
+  const [price, setPrice] = useState(fields?.price || 0.0);
+  const [startDate, setStartDate] = useState(fields?.startDate || "");
+  const [endDate, setEndDate] = useState(fields?.endDate || "");
 
   const [validationErrors, setValidationErrors] = useState([]);
 
@@ -78,7 +78,7 @@ function EventForm() {
     <div className="event-form form-page">
       <div className="form-container">
         <h1 className="unselectable">Create an Event</h1>
-        <p>{`This event will be for ${group.name}`}</p>
+        <p>{`This event will be for ${group?.name || fields.groupName}`}</p>
 
         <form onSubmit={handleSubmit}>
           <div className="form-fields">
