@@ -15,7 +15,7 @@ function AuthenticatedNavigation() {
 
   return (
     <div id="auth-nav">
-      <NavLink to="/profile">Profile</NavLink>
+      {/* <NavLink to="/profile">Profile</NavLink> TODO add profile*/}
       <button className="logout-button" onClick={logoutButtonClick}>
         Log out
       </button>
