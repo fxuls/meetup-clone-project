@@ -72,12 +72,15 @@ export const fetchMembers = (groupId) => async (dispatch) => {
 
   // parse ids into obj keys
   const membersObj = {};
-  data.Members.forEach((member) => (membersObj[member.id] = {
-    id: member.id,
-    firstName: member.firstName,
-    lastName: member.lastName,
-    status: member.Membership.status,
-  }));
+  data.Members.forEach(
+    (member) =>
+      (membersObj[member.id] = {
+        id: member.id,
+        firstName: member.firstName,
+        lastName: member.lastName,
+        status: member.Membership.status,
+      })
+  );
 
   dispatch(setMembers(groupId, membersObj));
   return res;
@@ -93,6 +96,26 @@ export const fetchGroupEvents = (groupId) => async (dispatch) => {
   data.Events.forEach((event) => (eventsObj[event.id] = event));
 
   dispatch(setGroupEvents(groupId, eventsObj));
+  return res;
+};
+
+// create group thunk
+export const createGroup = (group) => async (dispatch) => {
+  const { name, city, state, about, privacy, type } = group;
+
+  const res = await csrfFetch("/api/groups", {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      city,
+      state,
+      about,
+      privacy,
+      type,
+    }),
+  });
+  const data = await res.json();
+  dispatch(setGroup(data))
   return res;
 };
 
