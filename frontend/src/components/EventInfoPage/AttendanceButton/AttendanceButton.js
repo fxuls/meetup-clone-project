@@ -5,7 +5,7 @@ import { setUser, userSelector } from "../../../store/session";
 import { csrfFetch } from "../../../store/csrf";
 import { Link } from "react-router-dom";
 
-function AttendanceButton({ eventId, attendees, members, group }) {
+function AttendanceButton({ eventId, attendees, members, group, isMember }) {
   const history = useHistory();
 
   const [hasRequestedAttendance, setHasRequestedAttendance] = useState(false);
@@ -69,7 +69,7 @@ function AttendanceButton({ eventId, attendees, members, group }) {
   };
 
   // user is not a member of the group
-  if (!userMembership) {
+  if (!isMember) {
     return (
       <div className="attendance-button">
         <Link to={`/groups/${group.id}`}>Join Group</Link>
