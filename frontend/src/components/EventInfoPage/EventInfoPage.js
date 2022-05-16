@@ -23,6 +23,8 @@ function EventInfoPage() {
   const { groupId, eventId } = useParams();
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isOrganizer, setIsOrganizer] = useState(false);
+  const [hasClickedDelete, setHasClickedDelete] = useState(false);
 
   // get state info
   const group = useSelector(groupSelector(groupId));
@@ -30,6 +32,10 @@ function EventInfoPage() {
   const members = useSelector(membersSelector(groupId));
   const attendees = useSelector(attendeesSelector(eventId));
   const user = useSelector(userSelector);
+
+  useEffect(() => {
+    setIsOrganizer(user && group && group.organizerId == user.id);
+  }, [isLoaded, user, group]);
 
   // on initial render fetch group info and members
   useEffect(() => {
@@ -49,11 +55,13 @@ function EventInfoPage() {
       </div>
     );
 
+  if (!event) history.push("/");
+
   const { startDate, previewImage, name, description, Venue } = event;
 
-  const locationString = Venue ? `${Venue.address} • ${Venue.city}, ${stateToAbrev(
-    Venue.state
-  )}` : "No venue set";
+  const locationString = Venue
+    ? `${Venue.address} • ${Venue.city}, ${stateToAbrev(Venue.state)}`
+    : "No venue set";
 
   // convert startDate timestamp into text format
   // example: Friday, May 13, 2022
@@ -103,6 +111,21 @@ function EventInfoPage() {
               members={members}
               group={group}
             />
+
+            {isOrganizer ? (
+              <div className="organizer-buttons">
+                <button
+                  onClick={() => {
+                    if (!hasClickedDelete) return setHasClickedDelete(true);
+                    dispatch(deleteEvent(event.id)).then(() =>
+                      history.push("/")
+                    );
+                  }}
+                >
+                  {hasClickedDelete ? "Click to Confirm" : "Delete Group"}
+                </button>
+              </div>
+            ) : null}
           </div>
 
           <div className="info">
