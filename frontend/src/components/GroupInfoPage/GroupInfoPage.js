@@ -8,6 +8,7 @@ import {
   membersSelector,
   fetchGroupEvents,
   groupEventsSelector,
+  deleteGroup,
 } from "../../store/groups";
 import { userSelector } from "../../store/session";
 import { stateToAbrev } from "../../utils/index";
@@ -71,6 +72,8 @@ function GroupInfoPage(props) {
       : null;
   })();
 
+  if (!group) return history.push("/");
+
   const { previewImage, name, city, state, numMembers, Organizer, about } =
     group;
 
@@ -100,7 +103,7 @@ function GroupInfoPage(props) {
             <button onClick={() => history.push(`/groups/${groupId}/events/new`)}>New Event</button>
             <button onClick={() => {
               if (!hasClickedDelete) return setHasClickedDelete(true);
-
+              dispatch(deleteGroup(group.id)).then(() => history.push("/"));
             }}>{hasClickedDelete ? "Click to Confirm" : "Delete Group"}</button>
           </div>
         </div>
