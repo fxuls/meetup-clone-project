@@ -156,7 +156,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const userId = req.user.id;
     const { groupId } = req.params;
-    const { venueId, name, type, capacity, price, startDate, endDate } =
+    const { venueId, name, description, type, capacity, price, startDate, endDate } =
       req.body;
 
     // check that group exists
@@ -178,6 +178,7 @@ router.post(
       venueId,
       groupId,
       name,
+      description,
       type,
       capacity,
       price,
