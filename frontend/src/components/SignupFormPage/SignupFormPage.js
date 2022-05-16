@@ -70,8 +70,8 @@ function SignupFormPage() {
           <div className="form-fields">
             {validationErrors.length ? (
               <div className="form-errors">
-                {validationErrors.map((error) => (
-                  <p>{error}</p>
+                {validationErrors.map((error, i) => (
+                  <p key={i}>{error}</p>
                 ))}
               </div>
             ) : null}
