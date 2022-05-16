@@ -43,6 +43,14 @@ function GroupForm() {
         errors.push("State must be a valid, unabbreviated US state name");
     }
 
+    if (type !== "inperson" && type !== "virtual") {
+        errors.push("Type must be In person or Virtual");
+    }
+
+    if (privacy !== "public" && type !== "private") {
+        errors.push("Privacy must be Public or Private");
+    }
+
     if (errors.length === 0) {
       dispatch(
         createGroup({
