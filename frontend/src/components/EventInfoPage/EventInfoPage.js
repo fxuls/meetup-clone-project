@@ -8,6 +8,7 @@ import {
   fetchEvent,
   attendeesSelector,
   fetchAttendees,
+  deleteEvent,
 } from "../../store/events";
 import { membersSelector, fetchMembers } from "../../store/groups";
 import { userSelector } from "../../store/session";
@@ -24,6 +25,7 @@ function EventInfoPage() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOrganizer, setIsOrganizer] = useState(false);
+  const [isMember, setIsMember] = useState(false);
   const [hasClickedDelete, setHasClickedDelete] = useState(false);
 
   // get state info
@@ -35,7 +37,8 @@ function EventInfoPage() {
 
   useEffect(() => {
     setIsOrganizer(user && group && group.organizerId == user.id);
-  }, [isLoaded, user, group]);
+    setIsMember(user && members && group && group.members && group.members[user.id] !== undefined);
+  }, [isLoaded, user, group, members]);
 
   // on initial render fetch group info and members
   useEffect(() => {
@@ -110,6 +113,7 @@ function EventInfoPage() {
               attendees={attendees}
               members={members}
               group={group}
+              isMember={isMember}
             />
 
             {isOrganizer ? (
@@ -123,6 +127,11 @@ function EventInfoPage() {
                   }}
                 >
                   {hasClickedDelete ? "Click to Confirm" : "Delete Group"}
+                </button>
+                <button onClick={() => {
+                  history.push(`/groups/${groupId}/events/${eventId}/edit`);
+                }}>
+                  Edit Event
                 </button>
               </div>
             ) : null}
