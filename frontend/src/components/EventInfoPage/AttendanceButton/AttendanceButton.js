@@ -71,7 +71,7 @@ function AttendanceButton({ eventId, attendees, members, group }) {
   // user is not a member of the group
   if (!userMembership) {
     return (
-      <div>
+      <div className="attendance-button">
         <Link to={`/groups/${group.id}`}>Join Group</Link>
       </div>
     );
