@@ -56,7 +56,7 @@ router.get(
     group.groupImages = imagesToUrls(group.groupImages);
 
     // convert preview image to url
-    group.previewImage = group.previewImage.url;
+    group.previewImage = group.previewImage?.url;
 
     res.json(group);
   })
@@ -109,10 +109,11 @@ const validateGroup = [
     .exists({ checkFalsy: true })
     .isIn(["inperson", "virtual"])
     .withMessage("Type must be virtual or inperson."),
-  check("private")
-    .exists({ checkFalsy: true })
-    .isBoolean()
-    .withMessage("Private must be a boolean."),
+  // TODO undo this when private issue is fixed
+  // check("private")
+  //   .exists()
+  //   .isBoolean()
+  //   .withMessage("Private must be a boolean."),
   check("city").exists({ checkFalsy: true }).withMessage("City is required."),
   check("state").exists({ checkFalsy: true }).withMessage("State is required."),
   handleValidationErrors,
@@ -122,10 +123,13 @@ const validateGroup = [
 router.post(
   "/",
   requireAuth,
-  validateGroup,
+  // validateGroup,
   asyncHandler(async (req, res) => {
     const userId = req.user.id;
-    const { name, about, type, private, city, state } = req.body;
+    const { name, about, type, city, state } = req.body;
+
+    // TODO remove this once private issue is fixed
+    const private = false;
 
     const group = await Group.create({
       organizerId: userId,
