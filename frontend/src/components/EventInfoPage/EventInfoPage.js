@@ -15,6 +15,8 @@ import { userSelector } from "../../store/session";
 import Spinner from "../Spinner";
 import AttendanceButton from "./AttendanceButton";
 import { stateToAbrev } from "../../utils";
+import { Switch, Route } from "react-router-dom";
+import EventForm from "../EventForm/EventForm";
 
 import "./EventInfoPage.css";
 
@@ -37,7 +39,13 @@ function EventInfoPage() {
 
   useEffect(() => {
     setIsOrganizer(user && group && group.organizerId == user.id);
-    setIsMember(user && members && group && group.members && group.members[user.id] !== undefined);
+    setIsMember(
+      user &&
+        members &&
+        group &&
+        group.members &&
+        group.members[user.id] !== undefined
+    );
   }, [isLoaded, user, group, members]);
 
   // on initial render fetch group info and members
@@ -60,7 +68,17 @@ function EventInfoPage() {
 
   if (!event) history.push("/");
 
-  const { startDate, previewImage, name, description, Venue } = event;
+  const {
+    startDate,
+    previewImage,
+    name,
+    description,
+    Venue,
+    type,
+    endDate,
+    capacity,
+    price,
+  } = event;
 
   const locationString = Venue
     ? `${Venue.address} • ${Venue.city}, ${stateToAbrev(Venue.state)}`
@@ -72,80 +90,103 @@ function EventInfoPage() {
   const eventDateString = eventDate.format("dddd, MMMM, YYYY");
 
   return (
-    <div className="info-page container event-page">
-      <div className="event-grid">
-        <div className="event-header">
-          <p className="event-date">{eventDateString}</p>
-          <h1 className="event-name">{name}</h1>
-          <p className="host-info">
-            Hosted by{" "}
-            <span className="host-name">{`${group.Organizer.firstName} ${group.Organizer.lastName}`}</span>
-          </p>
-        </div>
+    <Switch>
+      <Route exact path={`/groups/${groupId}/events/${eventId}/edit`}>
+        <EventForm
+          fields={{
+            name,
+            description,
+            type,
+            capacity,
+            price,
+            startDate,
+            endDate,
+            groupName: group.name,
+          }}
+        />
+      </Route>
 
-        <div className="event-details">
-          <div className="preview-image-container">
-            <img src={previewImage} />
-          </div>
-          <h2>Details</h2>
-          <p>{description}</p>
-        </div>
-
-        <div className="event-sidebar">
-          <div
-            className="group-info-card hover-shadow"
-            onClick={() => history.push(`/groups/${groupId}`)}
-          >
-            <div className="preview-image-container">
-              <img src={group.previewImage} />
-            </div>
-            <div className="group-info">
-              <p className="name">{group.name}</p>
-              <p className="privacy">
-                {(group.private ? "Private" : "Public") + " group"}
+      <Route>
+        <div className="info-page container event-page">
+          <div className="event-grid">
+            <div className="event-header">
+              <p className="event-date">{eventDateString}</p>
+              <h1 className="event-name">{name}</h1>
+              <p className="host-info">
+                Hosted by{" "}
+                <span className="host-name">{`${group.Organizer.firstName} ${group.Organizer.lastName}`}</span>
               </p>
             </div>
-          </div>
 
-          <div className="actions-and-links">
-            <AttendanceButton
-              eventId={eventId}
-              attendees={attendees}
-              members={members}
-              group={group}
-              isMember={isMember}
-            />
-
-            {isOrganizer ? (
-              <div className="organizer-buttons">
-                <button
-                  onClick={() => {
-                    if (!hasClickedDelete) return setHasClickedDelete(true);
-                    dispatch(deleteEvent(event.id)).then(() =>
-                      history.push("/")
-                    );
-                  }}
-                >
-                  {hasClickedDelete ? "Click to Confirm" : "Delete Group"}
-                </button>
-                <button onClick={() => {
-                  history.push(`/groups/${groupId}/events/${eventId}/edit`);
-                }}>
-                  Edit Event
-                </button>
+            <div className="event-details">
+              <div className="preview-image-container">
+                <img src={previewImage} />
               </div>
-            ) : null}
-          </div>
+              <h2>Details</h2>
+              <p>{description}</p>
+            </div>
 
-          <div className="info">
-            <div className="location">
-              <h2>Where</h2>
-              <p>{locationString}</p>
+            <div className="event-sidebar">
+              <div
+                className="group-info-card hover-shadow"
+                onClick={() => history.push(`/groups/${groupId}`)}
+              >
+                <div className="preview-image-container">
+                  <img src={group.previewImage} />
+                </div>
+                <div className="group-info">
+                  <p className="name">{group.name}</p>
+                  <p className="privacy">
+                    {(group.private ? "Private" : "Public") + " group"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="actions-and-links">
+                <AttendanceButton
+                  eventId={eventId}
+                  attendees={attendees}
+                  members={members}
+                  group={group}
+                  isMember={isMember}
+                />
+
+                {isOrganizer ? (
+                  <div className="organizer-buttons">
+                    <button
+                      onClick={() => {
+                        if (!hasClickedDelete) return setHasClickedDelete(true);
+                        dispatch(deleteEvent(event.id)).then(() =>
+                          history.push("/")
+                        );
+                      }}
+                    >
+                      {hasClickedDelete ? "Click to Confirm" : "Delete Group"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        history.push(
+                          `/groups/${groupId}/events/${eventId}/edit`
+                        );
+                      }}
+                    >
+                      Edit Event
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="info">
+                <div className="location">
+                  <h2>Where</h2>
+                  <p>{locationString}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Route>
+    </Switch>
   );
 }
 
