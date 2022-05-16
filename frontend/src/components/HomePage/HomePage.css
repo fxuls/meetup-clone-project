@@ -87,6 +87,7 @@
 
 .card-info > p {
     margin: 0.5em 0;
+    overflow-wrap: anywhere;
 }
 
 .card-info > p.name {
