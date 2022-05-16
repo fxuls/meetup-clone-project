@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 export const SET_EVENTS = "events/SET_EVENTS";
 export const SET_EVENT = "events/SET_EVENT";
+export const REMOVE_EVENT = "events/REMOVE_EVENT";
 export const SET_ATTENDEES = "events/SET_ATTENDEES";
 
 export const allEventsSelector = (state) => state.events;
@@ -23,6 +24,14 @@ export function setEvent(event) {
     type: SET_EVENT,
     event,
   };
+}
+
+// REMOVE_EVENT action creator
+export function removeEvent(eventId) {
+  return {
+    type: REMOVE_EVENT,
+    eventId,
+  }
 }
 
 // SET_ATTENDEES action creator
@@ -100,6 +109,16 @@ export const createEvent = (event) => async (dispatch) => {
   return res;
 };
 
+// delete event thunk
+export const deleteEvent = (eventId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/events/${eventId}`, {
+    method: "DELETE",
+  });
+  const data = await res.json();
+  if (res.status === 200) dispatch(removeEvent(eventId));
+  return res;
+}
+
 export default function eventsReducer(state = {}, action) {
   const newEvents = { ...state };
 
@@ -116,6 +135,9 @@ export default function eventsReducer(state = {}, action) {
       const { attendees, eventId } = action;
       if (newEvents[eventId]) newEvents[eventId].attendees = attendees;
       else newEvents[eventId] = { attendees };
+      break;
+    case REMOVE_EVENT:
+      delete newEvents[eventId];
       break;
   }
 
