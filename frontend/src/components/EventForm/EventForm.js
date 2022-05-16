@@ -28,7 +28,6 @@ function EventForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit hit");
 
     let errors = [];
 
@@ -51,7 +50,6 @@ function EventForm() {
     // TODO polish more validations
 
     if (errors.length === 0) {
-        console.log("no errors");
       dispatch(
         createEvent({
           groupId,
