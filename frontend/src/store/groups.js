@@ -72,7 +72,12 @@ export const fetchMembers = (groupId) => async (dispatch) => {
 
   // parse ids into obj keys
   const membersObj = {};
-  data.Members.forEach((member) => (membersObj[member.id] = member));
+  data.Members.forEach((member) => (membersObj[member.id] = {
+    id: member.id,
+    firstName: member.firstName,
+    lastName: member.lastName,
+    status: member.Membership.status,
+  }));
 
   dispatch(setMembers(groupId, membersObj));
   return res;
