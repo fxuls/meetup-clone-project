@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
 import GroupInfoPage from "./components/GroupInfoPage/GroupInfoPage";
 import EventInfoPage from "./components/EventInfoPage/EventInfoPage";
+import GroupForm from "./components/GroupForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,8 +40,16 @@ function App() {
             <SignupFormPage />
           </Route>
 
+          <Route path="/groups/:groupId/events/new">
+              New event form
+          </Route>
+
           <Route path="/groups/:groupId/events/:eventId">
             <EventInfoPage />
+          </Route>
+
+          <Route path="/groups/new">
+            <GroupForm />
           </Route>
 
           <Route path="/groups/:groupId">
