@@ -128,7 +128,7 @@ export const createGroup = (group) => async (dispatch) => {
   return res;
 };
 
-// delete group action thunk
+// delete group thunk
 export const deleteGroup = (groupId) => async (dispatch) => {
   const res = await csrfFetch(`/api/groups/${groupId}`, {
     method: "DELETE",
