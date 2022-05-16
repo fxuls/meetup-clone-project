@@ -52,3 +52,5 @@ const states = {
 };
 
 export const stateToAbrev = (stateFull) => states[stateFull.toLowerCase()];
+
+export const isValidState = (state) => Object.keys(states).contains(state.toLowerCase());
