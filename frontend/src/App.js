@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
 import { restoreUser } from "./store/session";
+import { fetchGroups } from "./store/groups";
 import Navigation from "./components/Navigation";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -12,6 +13,8 @@ import HomePage from "./components/HomePage";
 import GroupInfoPage from "./components/GroupInfoPage/GroupInfoPage";
 import EventInfoPage from "./components/EventInfoPage/EventInfoPage";
 import GroupForm from "./components/GroupForm";
+import EventForm from "./components/EventForm/EventForm";
+import Spinner from "./components/Spinner";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,7 +22,10 @@ function App() {
 
   // restore user on render of App
   useEffect(() => {
-    dispatch(restoreUser()).then(() => setIsLoaded(true));
+    Promise.all([
+      dispatch(restoreUser()),
+      dispatch(fetchGroups()),
+    ]).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
@@ -27,6 +33,7 @@ function App() {
       <Navigation />
 
       <main>
+        {isLoaded ?
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -41,7 +48,7 @@ function App() {
           </Route>
 
           <Route path="/groups/:groupId/events/new">
-              New event form
+            <EventForm />
           </Route>
 
           <Route path="/groups/:groupId/events/:eventId">
@@ -59,7 +66,7 @@ function App() {
           <Route>
             <PageNotFoundPage />
           </Route>
-        </Switch>
+        </Switch> : <Spinner />}
       </main>
 
       <Footer />
