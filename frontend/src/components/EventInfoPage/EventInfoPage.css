@@ -123,6 +123,9 @@
 
 .event-page .event-sidebar .actions-and-links {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4em;
     min-width: 17em;
     background-color: white;
     border-radius: var(--tighter-border-radius);
@@ -137,7 +140,7 @@
     align-items: center;
 }
 
-.event-page .event-sidebar .attendance-button button {
+.event-page .event-sidebar button {
     background-color: var(--main-color);
     padding: 0.8em;
     border: none;
@@ -156,6 +159,13 @@
     border-radius: var(--tighter-border-radius);
     box-shadow: var(--light-box-shadow);
     padding: 0.5em;
+}
+
+.event-page .event-sidebar .actions-and-links .organizer-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.3em;
+    width: 100%;
 }
 
 .event-page .event-sidebar .info {
