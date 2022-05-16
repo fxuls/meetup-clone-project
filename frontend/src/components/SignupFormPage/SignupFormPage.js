@@ -36,8 +36,6 @@ function SignupFormPage() {
       errors.push("Password must be at least 6 characters");
     }
 
-    // debugger;
-
     if (errors.length === 0) {
       return dispatch(
         signup({
