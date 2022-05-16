@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 
 export const SET_GROUPS = "groups/SET_GROUPS";
 export const SET_GROUP = "groups/SET_GROUP";
+export const REMOVE_GROUP = "groups/REMOVE_GROUP";
 export const SET_MEMBERS = "groups/SET_MEMBERS";
 export const SET_GROUP_EVENTS = "groups/SET_GROUP_EVENTS";
 
@@ -27,6 +28,14 @@ export function setGroup(group) {
     type: SET_GROUP,
     group,
   };
+}
+
+// REMOVE_GROUP action creator
+export function removeGroup(groupId) {
+  return {
+    type: REMOVE_GROUP,
+    groupId,
+  }
 }
 
 // SET_MEMBERS action creator
@@ -119,6 +128,16 @@ export const createGroup = (group) => async (dispatch) => {
   return res;
 };
 
+// delete group action thunk
+export const deleteGroup = (groupId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/groups/${groupId}`, {
+    method: "DELETE",
+  });
+  const data = await res.json();
+  if (res.status === 200) dispatch(removeGroup(groupId));
+  return res;
+}
+
 export default function groupsReducer(state = {}, action) {
   const newGroups = { ...state };
   const { groupId } = action;
@@ -144,6 +163,9 @@ export default function groupsReducer(state = {}, action) {
       const { events } = action;
       if (newGroups[groupId]) newGroups[groupId].events = events;
       else newGroups[groupId] = { events };
+      break;
+    case REMOVE_GROUP:
+      delete newGroups[groupId];
       break;
   }
 
