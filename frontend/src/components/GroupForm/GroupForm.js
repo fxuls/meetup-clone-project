@@ -5,18 +5,18 @@ import { userSelector } from "../../store/session";
 import { createGroup } from "../../store/groups";
 import { isValidState } from "../../utils";
 
-function GroupForm() {
+function GroupForm({ fields }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const user = useSelector(userSelector);
 
-  const [name, setName] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [about, setAbout] = useState("");
-  const [privacy, setPrivacy] = useState("public");
-  const [type, setType] = useState("inperson");
+  const [name, setName] = useState(fields?.name || "");
+  const [city, setCity] = useState(fields?.city || "");
+  const [state, setState] = useState(fields?.state || "");
+  const [about, setAbout] = useState(fields?.about || "");
+  const [privacy, setPrivacy] = useState(fields?.privacy || "public");
+  const [type, setType] = useState(fields?.type || "inperson");
   const [validationErrors, setValidationErrors] = useState([]);
 
   // if user is not logged in redirect to login
@@ -190,7 +190,7 @@ function GroupForm() {
           </div>
 
           <button className="form-button" type="submit">
-            Create
+            {fields ? "Edit" : "Create"}
           </button>
         </form>
       </div>
