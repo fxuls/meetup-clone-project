@@ -1,14 +1,16 @@
+import { useHistory } from "react-router-dom";
+
 import "./Footer.css";
 
 function Footer() {
+  const history = useHistory();
 
-  // TODO add redirect for get started button
   return (
     <footer>
       <div className="footer-container">
         <div className="create-group">
           <span>Create your own Meetup group.</span>
-          <button>Get Started</button>
+          <button onClick={() => history.push("/groups/new")}>Get Started</button>
         </div>
         <p>This will be the footer information</p>
       </div>
