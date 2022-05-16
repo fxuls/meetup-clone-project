@@ -12,7 +12,7 @@ function Footer() {
           <span>Create your own Meetup group.</span>
           <button onClick={() => history.push("/groups/new")}>Get Started</button>
         </div>
-        <p>This will be the footer information</p>
+        {/* <p>This will be the footer information</p> */}
       </div>
     </footer>
   );
