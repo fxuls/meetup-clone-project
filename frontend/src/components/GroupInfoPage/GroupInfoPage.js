@@ -81,7 +81,7 @@ function GroupInfoPage(props) {
 
   if (!group) return history.push("/");
 
-  const { previewImage, name, city, state, numMembers, Organizer, about } =
+  const { previewImage, name, city, state, numMembers, Organizer, about, type } =
     group;
 
   return (
@@ -119,6 +119,9 @@ function GroupInfoPage(props) {
                 }}
               >
                 {hasClickedDelete ? "Click to Confirm" : "Delete Group"}
+              </button>
+              <button onClick={() => history.push(`/groups/${groupId}/edit`)}>
+                Edit Group
               </button>
             </div>
           ) : null}
