@@ -1,4 +1,4 @@
-import { useParams, Switch, Route, Link, useLocation } from "react-router-dom";
+import { useParams, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -21,15 +21,22 @@ import "./GroupInfoPage.css";
 function GroupInfoPage(props) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
   const { groupId } = useParams();
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isOrganizer, setIsOrganizer] = useState(false);
+  const [hasClickedDelete, setHasClickedDelete] = useState(false);
 
   // get state info
   const group = useSelector(groupSelector(groupId));
   const members = useSelector(membersSelector(groupId));
   const events = useSelector(groupEventsSelector(groupId));
   const user = useSelector(userSelector);
+
+  useEffect(() => {
+    setIsOrganizer(user && group && group.organizerId == user.id);
+  }, [isLoaded, user, group]);
 
   // on initial render fetch group info and members
   useEffect(() => {
@@ -70,7 +77,6 @@ function GroupInfoPage(props) {
   return (
     <div className="info-page container group-page">
       <div className="group-grid">
-
         <div className="preview-image-cell">
           <div className="preview-image-container">
             <img src={previewImage} />
@@ -89,6 +95,14 @@ function GroupInfoPage(props) {
             Organized by{" "}
             <span className="organizer-name">{`${Organizer.firstName} ${Organizer.lastName}`}</span>
           </p>
+
+          <div className="organizer-controls">
+            <button onClick={() => history.push(`/groups/${groupId}/events/new`)}>New Event</button>
+            <button onClick={() => {
+              if (!hasClickedDelete) return setHasClickedDelete(true);
+
+            }}>{hasClickedDelete ? "Click to Confirm" : "Delete Group"}</button>
+          </div>
         </div>
 
         <div className="nav-bar">
@@ -112,7 +126,7 @@ function GroupInfoPage(props) {
           ) : (
             <Switch>
               <Route exact path="/groups/:groupId/events">
-                <EventsBlock events={events}/>
+                <EventsBlock events={events} />
               </Route>
               <Route path="/groups/:groupId">
                 <AboutBlock
@@ -124,7 +138,6 @@ function GroupInfoPage(props) {
             </Switch>
           )}
         </div>
-        
       </div>
     </div>
   );
