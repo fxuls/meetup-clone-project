@@ -31,8 +31,6 @@ function EventInfoPage() {
   const attendees = useSelector(attendeesSelector(eventId));
   const user = useSelector(userSelector);
 
-  console.log(event);
-
   // on initial render fetch group info and members
   useEffect(() => {
     Promise.all([
